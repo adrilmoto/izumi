@@ -1,32 +1,67 @@
+<style lang="scss">
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "TT Commons Medium";
+}
+html {
+  padding: 0;
+  padding: 0;
+}
+@font-face {
+  font-family: "TT Commons ExtraBold";
+  src: url("/fonts/TTCommons-ExtraBold.woff") format("woff"),
+        url("/fonts/TTCommons-ExtraBold.eot") format("eot"),
+        url("/fonts/TTCommons-ExtraBold.ttf") format("ttf");
+}
+@font-face {
+  font-family: "TT Commons Light";
+  src: url("/fonts/TTCommons-Light.woff") format("woff"),
+        url("/fonts/TTCommons-Light.eot") format("eot"),
+        url("/fonts/TTCommons-Light.ttf") format("ttf");
+}
+@font-face {
+  font-family: "TT Commons Medium";
+  src: url("/fonts/TTCommons-Medium.woff") format("woff"),
+        url("/fonts/TTCommons-Medium.eot") format("eot"),
+        url("/fonts/TTCommons-Medium.ttf") format("ttf");
+}
+p {
+  // font-size: 20px;
+  font-family: "TT Commons Medium";
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+h1 {
+  font-family: "TT Commons ExtraBold";
+}
+h2 {
+  font-family: "TT Commons ExtraBold";
+}
+h6 {
+  font-family: "TT Commons Light";
+  font-weight: 200;
+  margin: 0;
+}
+h5 {
+  font-family: "TT Commons Medium";
+  margin: 0;
+}
+h3 {
+  font-family: "TT Commons ExtraBold";
+  margin: 0;
+}
+.br {
+  border: 1px solid red;
+}
+</style>
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
     <router-view/>
   </div>
 </template>
-
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<script>
+export default {
+  name: 'app'
 }
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>
+</script>

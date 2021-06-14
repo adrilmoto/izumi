@@ -1,10 +1,26 @@
 <style lang="scss" scoped>
+::-webkit-scrollbar {
+ width: 15px;
+ height: 5px;
+}
+::-webkit-scrollbar-thumb {
+ background: #000;
+//  border-radius: 15px;
+}
+::-webkit-scrollbar-thumb:hover{
+ background: #EABE44;
+}
+::-webkit-scrollbar-track{
+ background: #fff;
+ border-radius: 10px;
+//  box-shadow: inset 7px 10px 12px #f0f0f0;
+}
 .page {
   @apply flex flex-row h-screen items-start justify-center px-10;
   max-height: 100vh;
   overflow: scroll;
   &-wrapper {
-    @apply flex-col flex w-full justify-end;
+    @apply flex-col flex w-full justify-end py-9;
     // border: 1px solid red;
     max-width: 1100px;
     h1 {
@@ -48,7 +64,7 @@
 </style>
 <template lang="pug">
   .page
-    .page-wrapper.br
+    .page-wrapper
       .slide
         h1 Услуги
         h2 Brand platform  

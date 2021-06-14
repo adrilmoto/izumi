@@ -6,22 +6,6 @@
     position: relative;
   }
 }
-::-webkit-scrollbar {
- width: 15px;
- height: 5px;
-}
-::-webkit-scrollbar-thumb {
- background: #000;
-//  border-radius: 15px;
-}
-::-webkit-scrollbar-thumb:hover{
- background: #EABE44;
-}
-::-webkit-scrollbar-track{
- background: #fff;
- border-radius: 10px;
-//  box-shadow: inset 7px 10px 12px #f0f0f0;
-}
 </style>
 <template lang="pug">
   .layout

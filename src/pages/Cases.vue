@@ -1,9 +1,28 @@
 <style lang="scss" scoped>
+::-webkit-scrollbar {
+ width: 15px;
+ height: 5px;
+}
+::-webkit-scrollbar-thumb {
+ background: #000;
+//  border-radius: 15px;
+}
+::-webkit-scrollbar-thumb:hover{
+ background: #EABE44;
+}
+::-webkit-scrollbar-track{
+ background: #fff;
+ border-radius: 10px;
+//  box-shadow: inset 7px 10px 12px #f0f0f0;
+}
 .page {
-  @apply flex flex-row justify-center py-9 px-5;
+  @apply flex flex-row justify-center;
+  max-height: 100vh;
+  overflow: scroll;
   // border: 1px solid red;
   &-wrapper {
     // border: 1px solid red;
+    @apply py-9 px-5;
     max-width: 1100px;
     h2 {
       font-size: 60px;
@@ -69,7 +88,7 @@
   .page
     DialogCase(v-if="openedCase" @close="openCase()")
     .page-wrapper
-      h1 Кейсы
+      h1(style="margin-left: 20px;") Кейсы
       h2 Branding & Strategy
       .cases
         div(

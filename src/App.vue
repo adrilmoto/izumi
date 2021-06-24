@@ -1,4 +1,12 @@
 <style lang="scss">
+::-webkit-scrollbar {
+  width: 5px;
+//  height: 13px;
+}
+::-webkit-scrollbar-thumb {
+ background: black;
+//  border-radius: 10px;
+}
 body {
   padding: 0;
   margin: 0;
@@ -6,7 +14,7 @@ body {
 }
 html {
   padding: 0;
-  padding: 0;
+  margin: 0;
 }
 @font-face {
   font-family: "TT Commons ExtraBold";
@@ -55,13 +63,15 @@ h3 {
   border: 1px solid red;
 }
 </style>
-<template>
+<template lang="pug">
   <div id="app">
     <router-view/>
   </div>
 </template>
 <script>
 export default {
-  name: 'app'
+  name: 'app',
+  mounted() {
+  }
 }
 </script>

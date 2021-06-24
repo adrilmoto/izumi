@@ -1,26 +1,13 @@
 <style lang="scss" scoped>
-::-webkit-scrollbar {
- width: 15px;
- height: 5px;
-}
-::-webkit-scrollbar-thumb {
- background: #000;
-//  border-radius: 15px;
-}
-::-webkit-scrollbar-thumb:hover{
- background: #EABE44;
-}
-::-webkit-scrollbar-track{
- background: #fff;
- border-radius: 10px;
-//  box-shadow: inset 7px 10px 12px #f0f0f0;
-}
 .page {
-  @apply flex flex-row h-screen items-start justify-center px-10;
+  @apply flex flex-col w-full h-screen items-start justify-start;
+  // max-width: 100vh;
   max-height: 100vh;
-  overflow: scroll;
+  // overflow-y: scroll !important;
+  overflow: scroll !important;
+  scroll-snap-type: y mandatory;
   &-wrapper {
-    @apply flex-col flex w-full justify-end py-9;
+    @apply flex-col flex w-full justify-start pt-10 px-10;
     // border: 1px solid red;
     max-width: 1100px;
     h1 {
@@ -42,30 +29,36 @@
       margin: 0;
     }
     .brands {
-      font-size: 36px;
-      margin-top: 50px;
+      font-size: 28px;
+      margin-top: 20px;
     }
     .allows {
       font-size: 34px;
-      margin-top: 100px;
+      margin-top: 20px;
     }
     .faqs {
       font-size: 34px;
-      margin-top: 100px;
+      margin-top: 20px;
     }
   }
 }
 .slide {
-  @apply w-full;
+  @apply w-full flex justify-center ;
   // border: 1px solid red;
-  height: calc(100vh - 50px);
-  padding-top: 50px;
+  // padding-top: 50px;
+  // background: red;
+  min-height: calc(100vh - 20px);
+  max-height: calc(100vh - 20px);
+  scroll-snap-align: center;
+  width: 100%;
 }
+
+/* appearance fixes */
 </style>
 <template lang="pug">
-  .page
-    .page-wrapper
-      .slide
+  <div ref="page" class="page mandatory-scroll-snapping">
+    <div class="slide">
+      .page-wrapper
         h1 Услуги
         h2 Brand platform  
         h6 (Разработка бренд-стратегии для стартапа / новой ветки бизнеса или осуществление ребрендинга)
@@ -75,25 +68,34 @@
         h6(style="margin-left: 40px; margin-top: 40px; font-size: 28px; font-weight: 600;") + возможен бренд-менеджмент на аутсорсе
         h2 Special Projects
         h6 (Разработка любой бренд-коммуникации под ключ: концепция, реализация, аналитика)
-      .slide
+    </div>
+    <div class="slide">
+      .page-wrapper
         h1 Что мы умеем
         .allows
           div(v-for="(allow, allowIndex) in allows" :key="allowIndex" style="margin-top: 30px;")
             h3 {{allow.name}}
             h6 {{allow.description}}
         h6(style="margin-top: 60px; font-size: 28px; font-weight: 600;") + а если тут чего-то нет, скорее всего мы сможем отыскать нужного специалиста
-      .slide
+    </div>
+    <div class="slide">
+      .page-wrapper
         h1 Частые запросы
         .faqs
           div(v-for="(faq, faqIndex) in faqs" :key="faqIndex" style="margin-top: 30px;")
             h3 {{faq.name}}
             h6 {{faq.description}}
         h6(style="margin-top: 60px; font-size: 28px; font-weight: 600;") + заполните бриф: мы подберём конкретное решение для вашего бизнеса и произведём расчёт
+    </div>
+  </div>
+  //- div(ref="page" id="page").page
 </template>
 <script>
 export default {
+  name: 'Services',
   data() {
     return {
+      scrollTick: null,
       allows: [
         {name: 'Стратегия', description: 'influence, creative, content, community, PR'},
         {name: 'Дизайн', description: 'graph, web, motion, 3D'},
@@ -110,7 +112,7 @@ export default {
       ],
       faqs: [
         {
-          name: 'апуск / перезагрузка соцсетей',
+          name: 'Запуск / перезагрузка соцсетей',
           description: `«‎Наши каналы не отражают нас в полной мере»`
         },
         {
@@ -135,6 +137,8 @@ export default {
   methods: {
   },
   mounted() {
+  },
+  beforeDestroy() {
   }
 }
 </script>

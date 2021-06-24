@@ -12,7 +12,7 @@ const routes = [
       { path: '/about', name: 'about', component: () => import(/* webpackChunkName: "about" */ '../pages/About.vue') },
       { path: '/cases', name: 'cases', component: () => import(/* webpackChunkName: "cases" */ '../pages/Cases.vue') },
       { path: '/services', name: 'services', component: () => import(/* webpackChunkName: "servises" */ '../pages/Services.vue') },
-      { path: '/faces', name: 'feces', component: () => import(/* webpackChunkName: "faces" */ '../pages/Faces.vue') },
+      { path: '/community', name: 'community', component: () => import(/* webpackChunkName: "faces" */ '../pages/Community.vue') },
     ]
   },
 ]

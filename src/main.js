@@ -3,12 +3,13 @@ import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
 import store from './store'
-import { TweenMax, TweenLite, TimelineMax } from 'gsap'
+import { TweenMax, TweenLite, TimelineMax, gsap } from 'gsap'
 // import '@/assets/styles.css'
 
 Vue.config.productionTip = false
 
 Vue.prototype.$tween = TweenMax;
+Vue.prototype.$gsap = gsap;
 Vue.prototype.$tweenLite = TweenLite;
 Vue.prototype.$timeline = TimelineMax;
 

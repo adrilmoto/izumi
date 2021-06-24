@@ -16,7 +16,7 @@
 //  box-shadow: inset 7px 10px 12px #f0f0f0;
 }
 .drawer {
-  @apply h-screen bg-black z-40;
+  @apply h-screen z-40;
   width: 180px;
   // border: 1px solid red;
   &-content {
@@ -73,16 +73,18 @@
       }
       .twinkle-btn {
         margin-bottom: 10px;
-        border-radius: 10px;
-        width: calc(100% - 10px);
-        height: 60px;
+        border-radius: 15px;
+        width: calc(100% - 20px);
+        background:#EABE44;
+        opacity: 1 !important;
+        height: 50px;
         @apply flex flex-row relative;
-        border: 5px solid white;
+        border: 10px solid white;
         cursor: pointer;
         &-dot {
           position: absolute;
-          width: 50px;
-          height: 50px;
+          width: 40px;
+          height: 40px;
           background: white;
           margin-top: 5px;
           left: 10px;
@@ -110,10 +112,10 @@
           Brif
         div(v-else).top-menu
           div(v-for="link in links" @click="menuLink(link.path)").top-menu-link
-            p(:style="{ textDecoration: link.path === $route.path ? 'none' : 'line-through', color: link.path === $route.path ? 'rgba(255, 255, 255, 1)' : 'rgba(255, 255, 255, 0.6)' }").links {{link.name}}
+            p(:style="{ textDecoration: link.path === $route.path ? 'none' : 'none', color: link.path === $route.path ? 'rgba(255, 255, 255, 1)' : 'rgba(255, 255, 255, 0.6)' }").links {{link.name}}
         div(:style="{ transform: showMenu || showBrif ? 'rotate(180deg)' : 'rotate(0deg)'}" @click="handlerDrawer()").top-chevron
       .bottom
-        div(@click="changeTwinkle()").twinkle-btn
+        div(ref="twbtn" @click="changeTwinkle()").twinkle-btn
           div(ref="twinkle").twinkle-btn-dot
         div(@click="openBrif()").brif
           h1 БРИФ
@@ -140,7 +142,7 @@ export default {
         {name: 'О нас', path: '/about'},
         {name: 'Кейсы', path: '/cases'},
         {name: 'Услуги', path: '/services'},
-        {name: 'Комьюнити', path: '/faces'},
+        // {name: 'Комьюнити', path: '/faces'},
       ]
     }
   },
@@ -157,13 +159,17 @@ export default {
   },
   watch: {
     twinkle: {
-      // immediate: true,
+      immediate: true,
       async handler(to) {
         await this.$nextTick()
         if (to) {
-          this.$tween.to(this.$refs.twinkle, 0.5, { left: 'calc(100% - 60px)' })
+          this.$tween.to(this.$refs.twinkle, 0.5, { left: 'calc(100% - 50px)', background: '#000' })
+          this.$tween.to(this.$refs.twbtn, 0.5, { border: '10px solid black', background: '#534A91' })
+          this.$tween.to(this.$refs.drawer, 1, { background: '#fff', textColor: '#000' })
         } else {
-          this.$tween.to(this.$refs.twinkle, 0.5, { left: '10px' })
+          this.$tween.to(this.$refs.twinkle, 0.5, { left: '10px', background: '#fff' })
+          this.$tween.to(this.$refs.twbtn, 0.5, { border: '10px solid white', background: '#EABE44' })
+          this.$tween.to(this.$refs.drawer, 1, { background: '#000', color: '#fff' })
         }
       }
     },
@@ -203,8 +209,10 @@ export default {
   },
   methods: {
     async menuLink(link) {
-      if (this.showMenu) this.handlerDrawer()
-      await this.$wait(500)
+      this.$emit('link')
+      await this.$wait(1000)
+      // if (this.showMenu) this.handlerDrawer()
+      // await this.$wait(500)
       if (this.$route.path !== link) this.$router.push(link)
     },
     handlerDrawer() {
@@ -213,6 +221,7 @@ export default {
     },
     changeTwinkle() {
       this.twinkle = !this.twinkle
+      this.$emit('twinkle')
     },
     openBrif() {
       console.log('BRIF')

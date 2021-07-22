@@ -5,14 +5,14 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '',
-    name: 'Layout',
+    path: '/',
     component: () => import('../layouts/PublicLayout.vue'),
     children: [
-      { path: '/about', name: 'about', component: () => import(/* webpackChunkName: "about" */ '../pages/About.vue') },
-      { path: '/cases', name: 'cases', component: () => import(/* webpackChunkName: "cases" */ '../pages/Cases.vue') },
-      { path: '/services', name: 'services', component: () => import(/* webpackChunkName: "servises" */ '../pages/Services.vue') },
-      { path: '/community', name: 'community', component: () => import(/* webpackChunkName: "faces" */ '../pages/Community.vue') },
+      { path: '/', name: 'ГИФКА', component: () => import(/* webpackChunkName: "about" */ '../pages/Gif.vue') },
+      { path: '/about', name: 'О НАС', component: () => import(/* webpackChunkName: "about" */ '../pages/About.vue') },
+      { path: '/cases', name: 'КЕЙСЫ', component: () => import(/* webpackChunkName: "cases" */ '../pages/Cases.vue') },
+      { path: '/services', name: 'УСЛУГИ', component: () => import(/* webpackChunkName: "servises" */ '../pages/Services.vue') },
+      // { path: '/community', name: 'Комьюнити', component: () => import(/* webpackChunkName: "faces" */ '../pages/Community.vue') },
     ]
   },
 ]

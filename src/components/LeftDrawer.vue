@@ -1,231 +1,245 @@
 <style lang="scss" scoped>
-::-webkit-scrollbar {
- width: 5px;
- height: 5px;
-}
-::-webkit-scrollbar-thumb {
- background: #ffffff;
- border-radius: 10px;
-}
-::-webkit-scrollbar-thumb:hover{
- background: #EABE44;
-}
-::-webkit-scrollbar-track{
- background: #000;
- border-radius: 10px;
-//  box-shadow: inset 7px 10px 12px #f0f0f0;
-}
 .drawer {
-  @apply h-screen z-40;
-  width: 180px;
-  // border: 1px solid red;
+  @apply h-screen flex flex-col relative;
+  background: #191919;
+  min-width: 450px;
+  overflow: hidden;
   &-content {
-    @apply flex flex-col justify-between items-start py-4 pl-4;
-    .top {
-      @apply flex flex-row w-full justify-start items-start;
-      height: 400px;
-      padding-top: 70px;
-      .brifing {
-        width: 100%;
-        height: 800px;
-        padding-left: 80px;
-        // border: 1px solid red;
-        overflow-y: scroll;
-      }
-      &-logo {
-        @apply flex justify-end items-start;
-        // background: url('/images/izumi-logo.svg');
-        min-width: 100px;
-        // padding-right: 20px;
+    @apply flex flex-row;
+    &-left {
+      @apply flex flex-col;
+      .logo {
+        height: 26vh;
+        margin-top: -10px;
+        margin-left: -10px;
+        // max-width: 80px;
         // border: 1px solid red;
       }
-      &-menu {
-        @apply flex flex-col w-full h-full overflow-hidden items-start justify-start text-white;
-        // border: 1px solid red;
-        // margin-left: 20px;
+    }
+    &-right {
+      @apply flex flex-col justify-between;
+      .menu {
+        @apply flex flex-col;
+        padding-top: 50px;
+        // background: #191919;
+        // z-index: 100;
+        white-space: nowrap;
         &-link {
-          @apply cursor-pointer text-5xl;
-          white-space: nowrap;
+          padding: 10px 50px 10px 40px;
+          margin-left: 30px;
+          margin-right: 30px;
+          cursor: pointer;
+          a {
+            text-decoration: none;
+            font-size: 64px;
+            font-family: "TT Commons ExtraBold";
+            font-weight: 700;
+            color: #efefef;
+          }
           &:hover {
-            text-decoration: none ;
-            color: rgba(255, 255, 255, 1) !important;
+            opacity: 0.8;
+          }
+        }
+        .socials {
+          @apply flex flex-row justify-start space-x-5;
+          margin-top: 30px;
+          padding-left: 70px;
+          // border: 1px solid red;
+          .telegram {
+            width: 40px;
+            height: 40px;
+            background: url('/images/icons/telegram.svg');
+            @apply bg-center bg-contain bg-no-repeat cursor-pointer;
+            &:hover {
+              transform: scale(0.9);
+            }
+          }
+          .mail {
+            width: 40px;
+            height: 40px;
+            background: url('/images/icons/mail.svg');
+            @apply bg-center bg-contain bg-no-repeat cursor-pointer;
+            &:hover {
+              transform: scale(0.9);
+            }
+          }
+          .instagram {
+            width: 40px;
+            height: 40px;
+            background: url('/images/icons/instagram.svg');
+            @apply bg-center bg-contain bg-no-repeat cursor-pointer;
+            &:hover {
+              transform: scale(0.9);
+            }
           }
         }
       }
-      &-chevron {
-        background: url('/images/chevron.svg');
-        @apply bg-no-repeat bg-center bg-contain cursor-pointer right-0;
-        min-width: 80px;
-        height: 70px;
+      .brif {
+        @apply flex flex-col w-full items-start;
+        padding-left: 70px;
+        padding-bottom: 20px;
+        &-btn {
+          padding: 10px 10px 10px 0px;
+          --color: #efefef;
+          // padding-left: 70px;
+          @apply flex flex-row items-center cursor-pointer;
+          &:hover {
+            // background: rgba(255, 255,255, 0.2);
+            --color: #cccccc;
+          }
+          .text {
+            color: var(--color);
+            font-family: 'TT Commons ExtraBold';
+            font-style: normal;
+            font-weight: 900;
+            font-size: 64px;
+            line-height: 64px;
+            // border: 1px solid red;
+          }
+          .toggle {
+            border: 6px solid var(--color);
+            width: 87px;
+            height: 42px;
+            border-radius: 15px;
+            margin-left: 10px;
+            position: relative;
+            @apply flex items-center;
+            .ball {
+              position: absolute;
+              left: 5px;
+              --size: 30px;
+              height: var(--size);
+              width: var(--size);
+              border-radius: 50%;
+              background: var(--color);
+            }
+          }
+        }
+        .politic {
+          // margin-left: 45px;
+          // border: 1px solid red;
+          // margin-top: 10px;
+          // height: 30px;
+          position: relative;
+          // width: 150px;
+          cursor: pointer;
+          text-decoration: none;
+          // position: absolute;
+          white-space: wrap;
+          white-space: pre-wrap;       /* css-3 */
+          white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+          white-space: -pre-wrap;      /* Opera 4-6 */
+          white-space: -o-pre-wrap;    /* Opera 7 */
+          word-wrap: break-word;      /* Internet Explorer 5.5+ */
+          font-size: 16px;
+          color: #efefef;
+          line-height: 16px;
+          &:hover {
+            opacity: 0.6;
+          }
+        }
       }
     }
-    .bottom {
-      @apply absolute;
-      bottom: 20px;
+    .brif-container {
       // border: 1px solid red;
-      .brif {
-        cursor: pointer;
-        h1 {
-          font-size: 56px;
-          margin: 0;
-          color: #fff;
-        }
-      }
-      .twinkle-btn {
-        margin-bottom: 10px;
-        border-radius: 15px;
-        width: calc(100% - 20px);
-        background:#EABE44;
-        opacity: 1 !important;
-        height: 50px;
-        @apply flex flex-row relative;
-        border: 10px solid white;
-        cursor: pointer;
-        &-dot {
-          position: absolute;
-          width: 40px;
-          height: 40px;
-          background: white;
-          margin-top: 5px;
-          left: 10px;
-          border-radius: 50%;
-        }
-      }
+      padding-top: 100px;
+      // right: 0;
+      @apply relative w-full flex justify-start;
     }
   }
 }
-.links:hover {
-  // text-decoration: none !important;
-  color: rgba(255, 255, 255, 1) !important;
-}
 </style>
+
 <template lang="pug">
-  div(
-    ref="drawer"
-  ).drawer
+  div(ref="drawer").drawer
     .drawer-content
-      .top
-        .top-logo
-          Logo(:color="logoColor")
-        div(style="width: 40px;")
-        div(v-if="brif").brifing
-          Brif
-        div(v-else).top-menu
-          div(v-for="link in links" @click="menuLink(link.path)").top-menu-link
-            p(:style="{ textDecoration: link.path === $route.path ? 'none' : 'none', color: link.path === $route.path ? 'rgba(255, 255, 255, 1)' : 'rgba(255, 255, 255, 0.6)' }").links {{link.name}}
-        div(:style="{ transform: showMenu || showBrif ? 'rotate(180deg)' : 'rotate(0deg)'}" @click="handlerDrawer()").top-chevron
-      .bottom
-        div(ref="twbtn" @click="changeTwinkle()").twinkle-btn
-          div(ref="twinkle").twinkle-btn-dot
-        div(@click="openBrif()").brif
-          h1 БРИФ
+      .drawer-content-left
+        div(v-for="(log, logIndex) in 4" :key="logIndex")
+          Logo(:color="logIndex === page.id ? page.color : '#efefef'").logo
+      .drawer-content-right
+        .menu
+          div(
+            v-for="(route, idx) in $router.options.routes[0].children"
+            :style="{background: idx === page.id ? page.color : '', transform: 'rotate(5deg)'}"
+            @click="openedBrif = false"
+          ).menu-link
+            div(style="transform: rotate(-5deg)")
+              router-link(:to="route.path")  {{route.name}}
+          .socials
+            .instagram
+            .telegram
+            .mail
+        .brif
+          div(@click="openBrif()").brif-btn
+            .text БРИФ
+            div(ref="toggle" :style="{background: page.color}").toggle
+              div(ref="toggle-ball").ball
+          .politic
+            a(href="").politic Политика обработки персональных данных
+      .brif-container
+        Brif(v-if="openedBrif")
 </template>
 
 <script>
 import Logo from '@/components/Logo.vue'
+import Chevron from '@/components/Chevron.vue'
 import Brif from '@/components/Brif.vue'
+import gsap from 'gsap'
+
 export default {
   name: 'LeftDrawer',
   components: {
     Logo,
-    Brif
+    Chevron,
+    Brif,
   },
   data() {
     return {
-      showMenu: false,
-      showBrif: false,
-      brif: false,
-      drawerMax: 500,
-      drawerMini: 180,
-      twinkle: false,
-      links: [
-        {name: 'О нас', path: '/about'},
-        {name: 'Кейсы', path: '/cases'},
-        {name: 'Услуги', path: '/services'},
-        // {name: 'Комьюнити', path: '/faces'},
-      ]
+      openedBrif: false,
     }
   },
   computed: {
-    logoColor () {
-      if (this.$route.path === '/services') {
-        return '#EABE44'
-      }
-      if (this.$route.path === '/cases') {
-        return '#52427a'
-      }
-      return '#fff'
-    }
+    page() {
+      return this.$store.state.page
+    },
   },
   watch: {
-    twinkle: {
+    '$route.path': {
+      immediate: true,
+      async handler(to) {
+        await this.$nextTick()
+        // if (this.openedBrif === false) return
+        if (to === '/') {
+          gsap.to(this.$refs.drawer, { minWidth: window.innerWidth / 2 + 'px', duration: 1 })
+        } else {
+          gsap.to(this.$refs.drawer, { minWidth: '450px', duration: 1 })
+        }
+      }
+    },
+    openedBrif: {
       immediate: true,
       async handler(to) {
         await this.$nextTick()
         if (to) {
-          this.$tween.to(this.$refs.twinkle, 0.5, { left: 'calc(100% - 50px)', background: '#000' })
-          this.$tween.to(this.$refs.twbtn, 0.5, { border: '10px solid black', background: '#534A91' })
-          this.$tween.to(this.$refs.drawer, 1, { background: '#fff', textColor: '#000' })
+          gsap.to(this.$refs.drawer, { minWidth: window.innerWidth + 'px', duration: 1 })
+          gsap.to(this.$refs['toggle-ball'], { left: 'calc(100% - 35px)', duration: 1} )
+          // gsap.to(this.$refs.toggle, { background: '#', duration: 1} )
+          console.log('brif opened')
         } else {
-          this.$tween.to(this.$refs.twinkle, 0.5, { left: '10px', background: '#fff' })
-          this.$tween.to(this.$refs.twbtn, 0.5, { border: '10px solid white', background: '#EABE44' })
-          this.$tween.to(this.$refs.drawer, 1, { background: '#000', color: '#fff' })
+          gsap.to(this.$refs.drawer, { minWidth: '450px', duration: 1 })
+          gsap.to(this.$refs['toggle-ball'], { left: '5px', duration: 1})
+          // gsap.to(this.$refs.toggle, { background: this.page.color, duration: 1})
+          console.log('brif closed')
         }
-      }
-    },
-    showBrif: {
-      async handler(to) {
-        await this.$nextTick()
-        const tl = new this.$timeline()
-        if (to === true) {
-          // tl.set(this.$refs.drawer, { position: 'fixed'})
-          this.brif = !this.brif
-          tl.to(this.$refs.drawer, 1, { width: window.innerWidth + 'px' })
-          this.$emit('brif')
-        } else {
-          tl.to(this.$refs.drawer, 2, { width: this.drawerMini + 'px' })
-          this.$emit('brif')
-          await this.$wait(1800)
-          this.brif = !this.brif
-          // tl.set(this.$refs.drawer, { position: 'relative'})
-        }
-      }
-    },
-    showMenu: {
-      // immediate: true,
-      async handler(to) {
-        await this.$nextTick()
-        if (to === true) {
-          this.$tween.to(this.$refs.drawer, 0.5, { width: this.drawerMax })
-        }
-        if (!to && !this.showBrif) {
-          this.$tween.to(this.$refs.drawer, 0.5, { width: this.drawerMini })
-        }
+        
       }
     }
   },
   mounted() {
-    console.log(this.$route)
   },
   methods: {
-    async menuLink(link) {
-      this.$emit('link')
-      await this.$wait(1000)
-      // if (this.showMenu) this.handlerDrawer()
-      // await this.$wait(500)
-      if (this.$route.path !== link) this.$router.push(link)
-    },
-    handlerDrawer() {
-      if (this.showBrif) return this.showBrif = !this.showBrif
-      this.showMenu = !this.showMenu
-    },
-    changeTwinkle() {
-      this.twinkle = !this.twinkle
-      this.$emit('twinkle')
-    },
     openBrif() {
-      console.log('BRIF')
-      if (!this.showBrif) return this.showBrif = !this.showBrif
+      this.openedBrif = !this.openedBrif;
     }
   }
 }

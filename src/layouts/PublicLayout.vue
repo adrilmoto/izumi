@@ -1,71 +1,96 @@
 <style lang="scss" scoped>
 .layout {
-  @apply flex flex-row w-screen justify-start bg-white;
-  overflow: hidden !important;
+  @apply flex flex-row w-screen justify-start;
+  // overflow: hidden !important;
   // max-height: 100vh !important;
   &-content {
     @apply w-full h-screen;
+    max-width: calc(100vw - 450px);
     position: relative;
+    overflow-y: scroll !important;
+  }
+}
+.desktop {
+  display: inherit;
+}
+.mobile {
+  display: none;
+}
+.left-block {
+  width: 150px;
+  height: calc(100vh - 40px);
+  padding: 20px 0px;
+  background: #efefef;
+  @apply fixed right-0 flex flex-col justify-between items-center;
+  p {
+    font-family: 'TT Commons ExtraBold';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 30px;
+    line-height: 35px;
+    text-align: center;
+  }
+}
+@media screen and (max-width: 1300px) {
+  .left-block {
+    display: none;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .layout {
+    &-content {
+      max-width: calc(100vw);
+    }
+  }
+  .desktop {
+    display: none;
+  }
+  .mobile {
+    display: inherit;
   }
 }
 </style>
 <template lang="pug">
   div(ref="layout").layout
-    LeftDrawer(@brif="brifOpen()" @link="link()" @twinkle="twinkle()")
+    LeftDrawer().desktop
+    Header().mobile
     div(ref="content").layout-content
       router-view()
+    .left-block
+      p {{route}}
+      LogoMobile(color="#191919")
 </template>
 <script>
 import LeftDrawer from '@/components/LeftDrawer.vue'
+import Header from '@/components/Header.vue'
 import Services from '@/pages/Services.vue'
+import LogoMobile from '@/components/LogoMobile.vue'
 
 export default {
   name: 'PublicLayout',
   components: {
     LeftDrawer,
-    Services
+    Services,
+    Header,
+    LogoMobile,
   },
   data() {
     return {
-      brifOpened: false,
       scrollWidth: null,
       scrollTop: null,
     }
   },
   watch: {
-    brifOpened: {
-      async handler(to) {
-        if (to) {
-          // this.$tween.set(this.$refs.content, {  })
-          this.$tween.to(this.$refs.content, 1, { width: '0%' })
-        } else {
-          this.$tween.to(this.$refs.content, 2, { width: '100%' })
-        }
+    '$route.path': {
+      immediate: true,
+      handler(to) {
+        this.$store.dispatch('setColor', to)
       }
     }
-
   },
-  methods: {
-    async twinkle() {
-      this.$tween.to(this.$refs.layout, 1, { opacity: 0 })
-      await this.$wait(1000)
-      if (this.$route.path !== '/community') this.$router.push('/community')
-      else this.$router.push('/')
-      this.$tween.to(this.$refs.layout, 1, { opacity: 1 })
-      this.$log('twinkle')
-    },
-    brifOpen() {
-      this.$log('opened')
-      this.brifOpened = !this.brifOpened
-    },
-    async link() {
-      this.$tween.set(this.$refs.content, {zIndex: 1})
-      this.$tween.to(this.$refs.content, 1, {x: 4000})
-      await this.$wait(900)
-      this.$tween.set(this.$refs.content, {x: 0})
-      this.$tween.from(this.$refs.content, 1, {x: -4000})
-      await this.$wait(1000)
-      this.$tween.set(this.$refs.content, {zIndex: 10000})
+  computed: {
+    route() {
+      return this.$route.name
     }
   },
   mounted() {

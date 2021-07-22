@@ -62,6 +62,20 @@ h3 {
 .br {
   border: 1px solid red;
 }
+.desktop {
+  display: inherit;
+}
+.mobile {
+  display: none;
+}
+@media screen and (max-width: 700px) {
+  .desktop {
+    display: none !important;
+  }
+  .mobile {
+    display: inherit;
+  }
+}
 </style>
 <template lang="pug">
   <div id="app">

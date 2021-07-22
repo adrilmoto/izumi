@@ -1,16 +1,19 @@
 <style lang="scss" scoped>
 .page {
   @apply flex flex-row justify-center;
-  max-height: 100vh;
+  height: 100vh;
   overflow-y: scroll;
+  background: #efefef;
+  // padding: 20px;
   // border: 1px solid red;
   &-wrapper {
     // border: 1px solid red;
-    @apply py-9 px-5;
+    @apply w-full;
     max-width: 1100px;
     h2 {
-      font-size: 60px;
+      font-size: 48px;
       margin-left: 20px;
+      margin-bottom: 0px;
     }
     h1 {
       font-size: 100px;
@@ -18,52 +21,88 @@
     .cases {
       @apply flex flex-row flex-wrap;
       // border: 1px solid red;
+      .anim {
+        cursor: pointer;
+        transition: transform 500ms;
+        &:hover {
+          transform: translateY(-10px);
+          -webkit-transform: translateY(-10px);
+        }
+      }
       .case {
         background: url('/images/delimusic.png');
         @apply flex justify-center relative bg-center bg-no-repeat bg-contain;
         // box-shadow: 1px -1px 100px #000;
-        border: 1px solid rgb(216, 216, 216);
-        border-radius: 30px;
-        cursor: pointer;
-        width: 260px;
-        height: 260px;
+        // border: 1px solid rgb(216, 216, 216);
+        background: #efefef;
+        border-radius: 20px;
+        width: 140px;
+        height: 140px;
         margin: 20px;
-        margin-bottom: 70px;
-        &:hover {
-          transform: scale(1.01)
+        margin-bottom: 20px;
+        box-shadow: 11px 13px 16px 1px rgba(22, 22, 22, 0.15);
+        &-open {
+          height: 100%;
+          width: 100%;
+          // border: 1px solid red;
+          border-radius: 15px;
+        }
+        &-close {
+          width: 50px;
+          height: 50px;
+          background: lime;
+          @apply absolute top-0 right-0;
         }
         h6 {
           @apply absolute;
-          font-size: 34px;
-          font-weight: 500;
-          bottom: -50px;
+          font-size: 25px;
+          color: #191919;
+          font-weight: 200;
+          width: 170px;
+          text-align: center;
+          top: 110%;
         }
       }
     }
   }
 }
-.folder {
-  @apply flex flex-row flex-wrap relative;
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 30px;
-  width: 100%;
-  width: 260px;
-  // padding: 20px;
-  height: 260px;
-  margin: 20px;
-  margin-bottom: 70px;
-  .apps {
-    @apply flex flex-row flex-wrap justify-start content-start;
-    padding: 20px;
-    .app {
-      background: rgb(146, 146, 146);
-      border-radius: 10px;
-      cursor: pointer;
-      width: 60px;
-      height: 60px;
-      margin: 5px;
-      &:hover {
-        transform: scale(1.1);
+@media screen and (max-width: 1100px) {
+  .page {
+    @apply flex flex-row justify-center;
+    height: 100vh;
+    overflow-y: scroll;
+    background: #efefef;
+    // border: 1px solid red;
+    &-wrapper {
+      padding-top: 50px;
+    }
+  }
+}
+@media screen and (max-width: 600px){
+  .page {
+    &-wrapper {
+      padding: 20px;
+      padding-top: 50px;
+      h2 {
+        font-size: 32px;
+        margin-left: 20px;
+        margin-bottom: 0px;
+      }
+      .cases {
+        .case {
+          width: 60px;
+          height: 60px;
+          border-radius: 10px;
+          h6 {
+            @apply absolute;
+            font-size: 16px;
+            color: #191919;
+            font-weight: 700;
+            width: 100px;
+            text-align: center;
+            // border: 1px solid red;
+          }
+        }
       }
     }
   }
@@ -71,54 +110,49 @@
 </style>
 <template lang="pug">
   div(ref="page").page
-    DialogCase(v-if="openedCase" @close="openCase()" :dialogInfo="dialogInfo")
+    //- DialogCase(v-if="openedCase" @close="openCase()" :dialogInfo="dialogInfo")
     .page-wrapper
-      h1(style="margin-left: 20px;") Кейсы
       h2 Branding & Strategy
       .cases
         div(
           v-for="(block, caseId) in brandingStrategy"
           :key="caseId"
-          @click="openCase(brandingStrategy[caseId])"
+          :class="[!openedCase ? 'anim' : '']"
           :style="{backgroundImage: `url('/images/cases/${block.img}')`}"
         ).case
           h6 {{block.name}}
-      h2 CustDev
-      .cases
-        div(
-          v-for="(block, caseId) in custDev"
-          :key="caseId"
-          @click="openCase(custDev[caseId])"
-          :style="{backgroundImage: `url('/images/cases/${block.img}')`}"
-        ).case
-          h6 {{block.name}}
+          div(v-if="!openedCase" @click="openCase(block)").case-open
+          CaseContent(v-if="block.id === currentCase" :caseInfo="block" @close="closeCase()")
       h2 Special Projects
       .cases
         div(
           v-for="(block, caseId) in specialProjects"
-          :key="caseId"
-          @click="openCase(specialProjects[caseId])"
+          :key="caseId + brandingStrategy.length"
+          :class="[!openedCase ? 'anim' : '']"
           :style="{backgroundImage: `url('/images/cases/${block.img}')`}"
         ).case
           h6 {{block.name}}
-        .folder
-          .apps
-            div(v-for="pack in 4").app
+          div(v-if="!openedCase" @click="openCase(block)").case-open
+          CaseContent(v-if="block.id === currentCase" :caseInfo="block" @close="closeCase()")
 </template>
 <script>
 import DialogCase from '@/components/DialogCase.vue'
+import CaseContent from '@/components/CaseContent.vue'
 
 export default {
   name: 'Cases',
   components: {
-    DialogCase
+    DialogCase,
+    CaseContent
   },
   data() {
     return {
-      dialogInfo: null,
+      currentCase: null,
       openedCase: false,
       brandingStrategy: [
-        { name: 'Fosci',
+        { 
+          id: 0,
+          name: 'Fosci',
           img: 'fosci.png',
           brif: `
             Компания, разработавшая собственную ERP-систему для автоматизации доставок рационов питания,
@@ -138,7 +172,9 @@ export default {
             Начальный контент для аккаунта, исчерпывающий все базовые вопросы.
           `
         },
-        { name: 'Повод найдется',
+        { 
+          id: 1,
+          name: 'Повод найдется',
           img: 'povod.png',
           brif: `
             Компания Повод найдется обратилась с запросом создать собственную школу флористики и онлайн курс..
@@ -154,7 +190,9 @@ export default {
           results: `
           `
         },
-        { name: 'Делисервис',
+        { 
+          id: 2,
+          name: 'Делисервис',
           img: 'deliservice.png',
           brif: `
             Делисервис - новый старт-ап, мобильное приложение и сайт для получения услуг по 
@@ -173,8 +211,71 @@ export default {
           `
         },
       ],
-      custDev: [
-        { name: 'Sirius',
+      specialProjects: [
+        { 
+          id: 3,
+          name: 'DELI MUSIC DAY',
+          img: 'delimusicday.png',
+          brif: `
+            Делимобиль — один из сильнейших игроков на рынке каршеринга в России. Летом 2020 команда Дели запустила свежий формат для своих 
+            пользователей — драйв-ин фестиваль DELI MUSIC DAY. 
+            Наша задача состояла в том, чтобы поддержать мероприятие локальными нано-инфлюинсерами из Екатеринбурга.  
+          `,
+          creative: `
+
+          `,
+          release: `
+            Отобрали 15 наиболее ярких и молодых инфлюинсеров, проконтролировали своевременное размещение постов с нативным и эмоциональным упоминанием об ивенте.
+          `,
+          results: `
+            Построили максимальное знание о мероприятии. Простимулировали покупку билета. Обеспечили 
+            кросс-конверсию в инсталы приложения Делимобиль.
+          `
+        },
+        { 
+          id: 4,
+          name: 'Делимобиль',
+          img: 'deli.png',
+          brif: `
+            Каршеринг Delimobil обратилась с запросом создания серии видеороликов для привлечения миллениалов как новой аудитории.
+          `,
+          creative: `
+            Внедрение лаконичных антикризисных идей, направленных на развитие адекватного 
+            шеринг-комьюнити и формирование положительной репутации.
+          `,
+          release: `
+            Придумали и сняли серию ценностных lifestyle роликов, которые отражают ценности бренда.
+            Создание special project "Странные виды транспорта" с целью закрепить 
+            каршеринг в сознании пользователей как один из видов транспорта.
+          `,
+          results: `
+            Запустили ролики на различные платформы.
+          `
+        },
+        { 
+          id: 5,
+          name: 'Sixty',
+          img: 'sixty.png',
+          brif: `
+            60-ая Параллель — компания, осуществляющая строительно-ремонтные работы с 1990 года, 
+            преимущественно на государственных заказа обратилась с запросом создать качественную 
+            бренд-платформу новой ветки бизнеса (частный сектор) для запуска MVP
+          `,
+          creative: `
+            Презентовать бренд как опытную компанию, которая занимается ремонтом и строительством, провести ребрендинг с целью привлечь новую платежеспособную аудиторию.
+          `,
+          release: `
+            Сформировали уникальное торговое предложение. Произвели доработку названия. 
+            Представили вектор продвижения вашего бренда, опираясь на сегментирование целевой аудитории. 
+            Разработали корпоративную идентификацию для print- и digital-материалов: шрифты, цвета, элементы, стилистику, провели доработку логотипа.
+          `,
+          results: `
+            Создали новый образ компании как компании, которая объединяет современные технологии и ценный опыт.
+          `
+        },
+        { 
+          id: 6,
+          name: 'Sirius',
           img: 'sirius.png',
           brif: `
             Sirius — относительно молодой производитель навесных вентилируемых фасадов.
@@ -193,7 +294,9 @@ export default {
             Начали путь ребрендинга с фирменного стиля. Сотрудничество продолжается
           `
         },
-        { name: 'Ampl',
+        { 
+          id: 7,
+          name: 'Ampl',
           img: 'ampl.png',
           brif: `
             Ampl - бренд с
@@ -215,69 +318,23 @@ export default {
           `
         },
       ],
-      specialProjects: [
-        { name: 'DELI MUSIC DAY',
-          img: 'delimusicday.png',
-          brif: `
-            Делимобиль — один из сильнейших игроков на рынке каршеринга в России. Летом 2020 команда Дели запустила свежий формат для своих 
-            пользователей — драйв-ин фестиваль DELI MUSIC DAY. 
-            Наша задача состояла в том, чтобы поддержать мероприятие локальными нано-инфлюинсерами из Екатеринбурга.  
-          `,
-          creative: `
-
-          `,
-          release: `
-            Отобрали 15 наиболее ярких и молодых инфлюинсеров, проконтролировали своевременное размещение постов с нативным и эмоциональным упоминанием об ивенте.
-          `,
-          results: `
-            Построили максимальное знание о мероприятии. Простимулировали покупку билета. Обеспечили 
-            кросс-конверсию в инсталы приложения Делимобиль.
-          `
-        },
-        { name: 'Делимобиль',
-          img: 'deli.png',
-          brif: `
-            Каршеринг Delimobil обратилась с запросом создания серии видеороликов для привлечения миллениалов как новой аудитории.
-          `,
-          creative: `
-            Внедрение лаконичных антикризисных идей, направленных на развитие адекватного 
-            шеринг-комьюнити и формирование положительной репутации.
-          `,
-          release: `
-            Придумали и сняли серию ценностных lifestyle роликов, которые отражают ценности бренда.
-            Создание special project "Странные виды транспорта" с целью закрепить 
-            каршеринг в сознании пользователей как один из видов транспорта.
-          `,
-          results: `
-            Запустили ролики на различные платформы.
-          `
-        },
-        { name: 'Sixty',
-          img: 'sixty.png',
-          brif: `
-            60-ая Параллель — компания, осуществляющая строительно-ремонтные работы с 1990 года, 
-            преимущественно на государственных заказа обратилась с запросом создать качественную 
-            бренд-платформу новой ветки бизнеса (частный сектор) для запуска MVP
-          `,
-          creative: `
-            Презентовать бренд как опытную компанию, которая занимается ремонтом и строительством, провести ребрендинг с целью привлечь новую платежеспособную аудиторию.
-          `,
-          release: `
-            Сформировали уникальное торговое предложение. Произвели доработку названия. 
-            Представили вектор продвижения вашего бренда, опираясь на сегментирование целевой аудитории. 
-            Разработали корпоративную идентификацию для print- и digital-материалов: шрифты, цвета, элементы, стилистику, провели доработку логотипа.
-          `,
-          results: `
-            Создали новый образ компании как компании, которая объединяет современные технологии и ценный опыт.
-          `
-        },
-      ],
     }
   },
+  computed: {
+  },
+  watch: {
+  },
   methods: {
-    openCase(payload) {
-      this.dialogInfo = payload
-      this.openedCase = !this.openedCase
+    openCase(block) {
+      this.openedCase = true
+      console.log('open')
+      this.currentCase = block.id
+    },
+    closeCase() {
+      console.log('close')
+      this.openedCase = false
+      this.currentCase = null
+      // gsap.to(this.$refs[payload.name], { left: 'none', top: 'none', duration: 0.3,})
     }
   },
   async mounted() {

@@ -8,7 +8,7 @@
 }
 .block {
   @apply flex relative justify-start p-2;
-  background: white;
+  background: #efefef;
   border: 1px solid #eee;
   width: 80%;
   height: 80%;

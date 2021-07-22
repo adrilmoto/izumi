@@ -1,136 +1,133 @@
 <style lang="scss" scoped>
 .page {
-  @apply flex flex-col w-full h-screen items-start justify-start;
+  @apply flex flex-col w-full items-start justify-start;
   // max-width: 100vh;
-  max-height: 100vh;
+  // max-height: 100vh;
   // overflow-y: scroll !important;
-  overflow: scroll !important;
-  scroll-snap-type: y mandatory;
+  background: #efefef;
+  // overflow: scroll !important;
+  // scroll-snap-type: y mandatory;
+  padding-bottom: 200px;
   &-wrapper {
-    @apply flex-col flex w-full justify-start pt-10 px-10;
+    max-width: calc(100% - 200px);
+    padding-left: 50px;
     // border: 1px solid red;
-    max-width: 1100px;
-    h1 {
-      // font-family: "TT Commons ExtraBold";
-      font-size: 100px;
-      // border: 1px solid red;
-      margin: 0;
-    }
-    h2 {
-      font-size: 60px;
-      margin: 0;
-      // border: 1px solid red;
+    // @apply;
+    .service-block {
+      border-left: 13px solid #EABE44;
       margin-top: 50px;
-    }
-    h6 {
-      // border: 1px solid red;
-      font-size: 24px;
-      font-weight: 500;
-      margin: 0;
-    }
-    .brands {
-      font-size: 28px;
-      margin-top: 20px;
-    }
-    .allows {
-      font-size: 34px;
-      margin-top: 20px;
-    }
-    .faqs {
-      font-size: 34px;
-      margin-top: 20px;
+      padding-left: 20px;
+      @apply flex flex-col;
+      h1 {
+        font-family: 'TT Commons ExtraBold';
+        font-style: normal;
+        font-weight: bold;
+        font-size: 48px;
+        line-height: 48px;
+        margin: 0px;
+        color: #191919;
+      }
+      p {
+        font-family: 'TT Commons Medium';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 28px;
+        line-height: 32px;
+        color: #8A8A8A;
+      }
+      .tabs {
+        @apply flex flex-row flex-wrap;
+        margin-left: -10px;
+        .tab {
+          border-radius: 10px;
+          box-shadow: -4px 4px 10px rgba(0, 0, 0, 0.1);
+          padding: 10px 10px;
+          background: #EFEFEF;
+          margin: 10px;
+          p {
+            font-family: 'TT Commons Medium';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 18px;
+            color: #191919;
+          }
+        }
+      }
     }
   }
 }
-.slide {
-  @apply w-full flex justify-center ;
-  // border: 1px solid red;
-  // padding-top: 50px;
-  // background: red;
-  min-height: calc(100vh - 20px);
-  max-height: calc(100vh - 20px);
-  scroll-snap-align: center;
-  width: 100%;
+.accent {
+  color: #52427A;
 }
-
 /* appearance fixes */
 </style>
 <template lang="pug">
-  <div ref="page" class="page mandatory-scroll-snapping">
-    <div class="slide">
-      .page-wrapper
-        h1 Услуги
-        h2 Brand platform  
-        h6 (Разработка бренд-стратегии для стартапа / новой ветки бизнеса или осуществление ребрендинга)
-        .brands
-          div(v-for="(brand, brandIndex) in brands" :key="brandIndex")
-            h3 -{{brand}}
-        h6(style="margin-left: 40px; margin-top: 40px; font-size: 28px; font-weight: 600;") + возможен бренд-менеджмент на аутсорсе
-        h2 Special Projects
-        h6 (Разработка любой бренд-коммуникации под ключ: концепция, реализация, аналитика)
-    </div>
-    <div class="slide">
-      .page-wrapper
-        h1 Что мы умеем
-        .allows
-          div(v-for="(allow, allowIndex) in allows" :key="allowIndex" style="margin-top: 30px;")
-            h3 {{allow.name}}
-            h6 {{allow.description}}
-        h6(style="margin-top: 60px; font-size: 28px; font-weight: 600;") + а если тут чего-то нет, скорее всего мы сможем отыскать нужного специалиста
-    </div>
-    <div class="slide">
-      .page-wrapper
-        h1 Частые запросы
-        .faqs
-          div(v-for="(faq, faqIndex) in faqs" :key="faqIndex" style="margin-top: 30px;")
-            h3 {{faq.name}}
-            h6 {{faq.description}}
-        h6(style="margin-top: 60px; font-size: 28px; font-weight: 600;") + заполните бриф: мы подберём конкретное решение для вашего бизнеса и произведём расчёт
-    </div>
-  </div>
-  //- div(ref="page" id="page").page
+  div(ref="page" class="page")
+    .page-wrapper
+      div(v-for="(block, blockId) in blocks" :key="blockId" :style="{borderLeft: `13px solid ${block.color}`}").service-block
+        h1 {{block.name}}
+        p(v-html="block.description")
+        .tabs
+          div(v-for="(tab, tabId) in block.tabs" :key="tabId").tab
+            p {{tab}}
 </template>
 <script>
 export default {
   name: 'Services',
   data() {
     return {
-      scrollTick: null,
-      allows: [
-        {name: 'Стратегия', description: 'influence, creative, content, community, PR'},
-        {name: 'Дизайн', description: 'graph, web, motion, 3D'},
-        {name: 'Родакшен', description: 'style, photo, video, sound'},
-        {name: 'Социальные сети', description: 'visual concept, texts, stories'},
-      ],
-      brands: [
-        'CustDev',
-        'Позиционирование',
-        'Фирменный стиль',
-        'Коммуникационная стратегия',
-        'Визуальная концепция',
-        'Оформление брендбука',
-      ],
-      faqs: [
+      blocks: [
         {
-          name: 'Запуск / перезагрузка соцсетей',
-          description: `«‎Наши каналы не отражают нас в полной мере»`
+          id: 0,
+          name: 'Brand platform',
+          description: `Разработка <span style="color: #52427A;">бренд-стратегии</span> для стартапа, новой ветки бизнеса или осуществление <span style="color: #52427A;">ребрендинга.</span>`,
+          tabs: [
+            'CustDev',
+            'Позиционирование',
+            'Коммуникационная стратегия',
+            'Фирменный стиль',
+            'Визаульная концепция',
+            'Оформление брендбука',
+            'Возможен бренд-менеджмент на аутсорсе',
+          ],
+          color: '#EABE44'
         },
         {
-          name: 'Креативные идеи под ключ',
-          description: '«Делаем одно и то же, нужен свежий взгляд»'
+          id: 1,
+          name: 'Special Projects',
+          description: 'Разработка любой бренд-коммуникации под ключ: концепция, реализация, аналитика',
+          tabs: [],
+          color: '#E29229'
         },
         {
-          name: 'Перехват операционки',
-          description: `«Есть идеи, не хватает инхаус рук — спасайте»‎`
+          id: 2,
+          name: 'Стратегия',
+          description: 'influence, creative, content, community, PR',
+          tabs: [],
+          color: '#CE5236'
         },
         {
-          name: 'Коллаборация с другим брендом',
-          description: '«Хотим обмен аудиториями, но не знаем с кем и как»'
+          id: 3,
+          name: 'Дизайн',
+          description: 'graph, web, motion, 3D',
+          tabs: [],
+          color: '#6362A0'
         },
         {
-          name: 'Проработка tone of voice',
-          description: '«На каком языке общаться с молодёжью? кринж? флекс? тикток?»'
+          id: 4,
+          name: 'Продакшен',
+          description: 'style, photo, video, sound',
+          tabs: [],
+          color: '#52427A'
         },
+        {
+          id: 5,
+          name: 'Социальные сети',
+          description: 'visual concept, texts, stories',
+          tabs: [],
+          color: '#EABE44'
+        }
       ]
     }
   },

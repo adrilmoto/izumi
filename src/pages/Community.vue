@@ -14,6 +14,6 @@
 </style>
 <template lang="pug">
   .page
-    .page-wrapper.br
+    .page-wrapper
       h1 Community
 </template>

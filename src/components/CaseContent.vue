@@ -117,11 +117,11 @@ div(ref="el").info
       h2(:style="{color: page.color}") Бриф
       p {{caseInfo.brif}}
       h2(:style="{color: page.color}") Креативная идея
-      p {{caseInfo.release}}
+      p {{caseInfo.creative}}
       h2(:style="{color: page.color}") Реализация
       p {{caseInfo.release}}
       h2(:style="{color: page.color}") Итоги
-      p {{caseInfo.release}}
+      p {{caseInfo.results}}
       h2(:style="{color: page.color}") Ссылки
       a(v-for="link in caseInfo.links" :href="link.url" target="_blanck") {{link.name}}
     .right

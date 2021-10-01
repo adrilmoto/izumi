@@ -4,10 +4,9 @@
   // overflow: hidden !important;
   // max-height: 100vh !important;
   &-content {
-    @apply w-full h-screen;
-    max-width: calc(100vw - 450px);
+    @apply w-full h-screen block;
+    max-width: calc(100% - 340px);
     position: relative;
-    overflow-y: scroll !important;
   }
 }
 .desktop {
@@ -36,7 +35,7 @@
     display: none;
   }
 }
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1100px) {
   .layout {
     &-content {
       max-width: calc(100vw);
@@ -51,14 +50,14 @@
 }
 </style>
 <template lang="pug">
-  div(ref="layout").layout
-    LeftDrawer().desktop
-    Header().mobile
-    div(ref="content").layout-content
-      router-view()
-    .left-block
-      p {{route}}
-      LogoMobile(color="#191919")
+div(ref="layout").layout
+  LeftDrawer().desktop
+  Header().mobile
+  div(ref="content" :style="{ overflowY: $route.path !== '/' ? 'scroll' : 'hidden' }").layout-content
+    router-view()
+  div(v-if="$route.path !== '/'").left-block
+    p {{route}}
+    LogoMobile(color="#191919")
 </template>
 <script>
 import LeftDrawer from '@/components/LeftDrawer.vue'

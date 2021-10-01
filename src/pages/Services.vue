@@ -45,12 +45,65 @@
           background: #EFEFEF;
           margin: 10px;
           p {
-            font-family: 'TT Commons Medium';
+            font-family: 'TT Commons ExtraBold';
             font-style: normal;
             font-weight: 600;
             font-size: 18px;
-            line-height: 18px;
+            line-height: 100%;
             color: #191919;
+          }
+        }
+      }
+    }
+  }
+}
+.mobile {
+  display: none;
+}
+@media screen and (max-width: 1100px) {
+  .page {
+    &-wrapper {
+      max-width: 100%;
+      // border: 1px solid red;
+      padding-top: 50px;
+      padding-left: 20px;
+    }
+  }
+}
+@media screen and (max-width: 600px) {
+  .mobile {
+    display: inherit;
+    position: absolute;
+    left: -2px;
+    height: 100%;
+    width: 8px;
+    // border: 1px solid red;
+  }
+  .page {
+    &-wrapper {
+      max-width: 100%;
+      // border: 1px solid red;
+      padding-top: 50px;
+      padding-left: 10px;
+      padding-right: 10px;
+      .service-block {
+        border: none !important;
+        position: relative;
+        h1 {
+          font-size: 34px;
+        }
+        p {
+          font-size:22px;
+        }
+        .tabs {
+          .tab {
+            padding: 0px 10px;
+            margin: 5px;
+            // border: 1px solid red;
+            border-radius: 5px;
+            p {
+              font-size: 14px;
+            }
           }
         }
       }
@@ -63,14 +116,15 @@
 /* appearance fixes */
 </style>
 <template lang="pug">
-  div(ref="page" class="page")
-    .page-wrapper
-      div(v-for="(block, blockId) in blocks" :key="blockId" :style="{borderLeft: `13px solid ${block.color}`}").service-block
-        h1 {{block.name}}
-        p(v-html="block.description")
-        .tabs
-          div(v-for="(tab, tabId) in block.tabs" :key="tabId").tab
-            p {{tab}}
+div(ref="page" class="page")
+  .page-wrapper
+    div(v-for="(block, blockId) in blocks" :key="blockId" :style="{borderLeft: `13px solid ${block.color}`}").service-block
+      h1 {{block.name}}
+      p(v-html="block.description")
+      .tabs
+        div(v-for="(tab, tabId) in block.tabs" :key="tabId").tab
+          p {{tab}}
+      div(:style="{background: `${block.color}`}").mobile
 </template>
 <script>
 export default {
@@ -81,21 +135,22 @@ export default {
         {
           id: 0,
           name: 'Brand platform',
-          description: `Разработка <span style="color: #52427A;">бренд-стратегии</span> для стартапа, новой ветки бизнеса или осуществление <span style="color: #52427A;">ребрендинга.</span>`,
+          description: `Разработка <span style="color: #52427A;">бренд-стратегии</span> для стартапа, новой ветки бизнеса или осуществление <span style="color: #52427A;">ребрендинга</span>`,
           tabs: [
             'CustDev',
             'Позиционирование',
+            'Нейминг',
             'Коммуникационная стратегия',
             'Фирменный стиль',
-            'Визаульная концепция',
-            'Оформление брендбука',
-            'Возможен бренд-менеджмент на аутсорсе',
+            'Визуальная концепция',
+            'Брендбук',
+            'Бренд-менеджмент на аутсорсе',
           ],
           color: '#EABE44'
         },
         {
           id: 1,
-          name: 'Special Projects',
+          name: 'Special Project',
           description: 'Разработка любой бренд-коммуникации под ключ: концепция, реализация, аналитика',
           tabs: [],
           color: '#E29229'

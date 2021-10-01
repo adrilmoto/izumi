@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@sentry/vue": "^6.2.5",
+    "@supabase/supabase-js": "^1.24.0",
     "@tailwindcss/postcss7-compat": "^2.1.0",
     "autoprefixer": "^9",
     "axios": "^0.21.1",

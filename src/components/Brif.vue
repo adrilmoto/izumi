@@ -1,4 +1,7 @@
 <style lang="scss" scoped>
+.buttons-group {
+  @apply absolute right-5 bottom-5 flex flex-row space-x-2;
+}
 .brif {
   @apply absolute block;
   // margin-left: 130px;
@@ -10,10 +13,29 @@
   // box-shadow: -4px 4px 0px rgb(156, 156, 156);
   padding: 20px;
   max-height: 500px;
-  border: 1px solid red;
   // height: 500px;
+  .close {
+    width: 40px;
+    height: 40px;
+    display: none;
+    background: url('/images/close.svg');
+    right: 30px;
+    top: 10px;
+    @apply absolute bg-center bg-no-repeat bg-contain;
+    // border: 1px solid red;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    &:focus {
+      outline: none;
+    }
+    &:hover {
+      transform: scale(1.05)
+    }
+  }
   .content {
     // height: 200px;
+    @apply w-full h-full relative flex;
     padding-bottom: 70px;
     p {
       font-size: 22px;
@@ -42,7 +64,7 @@
     }
   }
   .btn {
-    @apply absolute bottom-5 right-5 cursor-pointer;
+    @apply cursor-pointer;
     padding: 10px 20px;
     font-weight: 700;
     font-size: 22px;
@@ -59,6 +81,27 @@
     }
     &:active {
       background: #b99121;
+    }
+  }
+  .back-btn {
+    @apply cursor-pointer;
+    padding: 10px 20px;
+    font-weight: 700;
+    font-size: 22px;
+    outline: none;
+    border: none;
+    background: #858585;
+    color: #efefef;
+    // margin-top: 10px;
+    border-radius: 4px;
+    &:hover {
+      background: #979797;
+    }
+    &:disabled {
+      background: rgb(102, 102, 102);
+    }
+    &:active {
+      background: #313131;
     }
   }
   .i-textarea {
@@ -111,93 +154,162 @@
       max-width: 0;
       h1 {
         @apply absolute;
-        right: -5px;
+        right: -5px !important;
         bottom: -15px;
       }
     }
   }
 }
+@media screen and (max-width: 1100px) {
+  .brif {
+    // margin-left: 130px;
+    min-width: 100% !important;
+    max-width: 100vw !important;
+    border-radius: 0px;
+    // box-shadow: -4px 4px 0px rgb(156, 156, 156);
+    max-height: 100% !important;
+    // height: 500px;
+    padding: 10px;
+    width: 100% !important;
+    // overflow: scroll;
+    @apply flex flex-col items-start justify-start fixed inset-0;
+    .close {
+      display: inherit;
+    }
+    h1 {
+      width: calc(100% - 20px);
+    }
+    .navbar {
+      // padding: 0;
+      width: 94%;
+      // margin-top: 20px;
+    }
+    .content {
+      @apply flex flex-col items-start justify-start h-full;
+      padding-bottom: 0;
+      p {
+        font-size: 18px;
+      }
+      // overflow-y: scroll;
+      width: calc(100% - 22px);
+      .section {
+        .inputs {
+          padding-bottom: 40px;
+          @apply flex flex-col;
+          width: calc(100% + 10px);
+          // border: 1px solid red;
+
+          // border: 1px solid red;
+          height: 60%;
+          input {
+            width: calc(100% - 50px);
+          }
+        }
+      }
+    }
+    .buttons-group {
+      width: calc(100% - 40px);
+      left: 10px;
+      bottom: 10px;
+      .btn {
+        left: 10px;
+        bottom: 10px;
+        width: 100%;
+      }
+      .back-btn {
+        bottom: 10px;
+        width: 100%;
+      }
+    }
+    
+  }
+  
+}
 </style>
 
 <template lang="pug">
-  div(:style="{color: contentColor}").brif
-    h1 Бриф для новых клиентов izumi
-    .navbar
-      div(ref="value").value
-        h1 {{stage}}
-    div.content
-      div(v-if="stage === 1").section
-        p {{description}}
-      div(v-if="stage === 2").section
-        p Расскажите чем вы занимаетесь! Нам очень интересно вас послушать!
-        p Концепция проекта. В чем ваше отличие от конкурентов. Почему вы начали заниматься именно этим?
-        textarea(contentEditable v-model="form.do").i-textarea
-      div(v-if="stage === 3" ).section
-        p Какая у вас миссия?
-        p Какие услуги вас интерисуют больше всего?
-        textarea(contentEditable v-model="form.mission").i-textarea
-      div(v-if="stage === 4").section
-        p Какие у вас задачи?
-        p Какой путь решения задач вы видите?
-        textarea(contentEditable v-model="form.tasks").i-textarea
-      div(v-if="stage === 5").section
-        p Контактные данные
-        .inputs
-          div(style="width: 100%")
-            div.cont-block
-              p Имя
-              input(v-model="form.name")
-            div.cont-block
-              p Телефон
-              input(v-model="form.phone")
-          div(style="width: 100%")
-            div.cont-block
-              p Компания
-              input(v-model="form.company")
-            div.cont-block
-              p Электронная почта
-              input(v-model="form.mail")
-      div(v-if="stage === 6").section.section-last
-        .title
-          h1 Поздравляем!
-          .congrats
-        p Совсем скоро мы с вами свяжемся!
+div(:style="{color: contentColor}").brif
+  button(@click="$emit('close')").close
+  h1 Бриф для новых клиентов izumi
+  .navbar
+    div(ref="value").value
+      h1 {{stage}}
+  div.content
+    div(v-if="stage === 1").section
+      p {{description}}
+    div(v-if="stage === 2").section
+      p Расскажите, чем вы занимаетесь. Нам очень интересно вас послушать!
+      p Какова концепция проекта? В чём ваше отличие от конкурентов? Почему вы начали заниматься именно этим?
+      textarea(contentEditable v-model="form.do").i-textarea
+    div(v-if="stage === 3" ).section
+    
+      p Какая у вас миссия?
+      p Кто ваша ЦА и конкуренты?
+      textarea(contentEditable v-model="form.mission").i-textarea
+    div(v-if="stage === 4").section
+      p Озвучьте бизнес / маркетинговую задачу, которая стоит перед вашей компанией.
+      p Какой путь решения вы видите?
+      textarea(contentEditable v-model="form.tasks").i-textarea
+    div(v-if="stage === 5").section
+      p Контактные данные
+      .inputs
+        div(style="width: 100%")
+          div.cont-block
+            p Имя
+            input(v-model="form.name")
+          div.cont-block
+            p Телефон
+            input(v-model="form.phone")
+        div(style="width: 100%")
+          div.cont-block
+            p Компания
+            input(v-model="form.company")
+          div.cont-block
+            p Электронная почта
+            input(v-model="form.mail")
+    div(v-if="stage === 6").section.section-last
+      .title
+        h1 Поздравляем!
+        .congrats
+      p Совсем скоро мы с вами свяжемся!
+  .buttons-group
+    button(v-if="stage !== 6" @click="lastStage()" :disabled="btnDisabled").back-btn Назад
     button(v-if="stage !== 6" @click="nextStage()" :disabled="btnDisabled").btn {{btnText}}
-  //- .brif
-  //-   form(@submit.prevent="handleSubmit()")
-  //-     h1(style="font-size: 56px; width: 60%; position: absolute; white-space: nowrap; margin-top: 0;") Бриф для новых клиентов izumi
-  //-     p(style="margin-top: 100px;") {{ description }}
-  //-     h5 Чем вы занимаетесь?
-  //-     p Концепция проекта. В чем ваше отличие от конкурентов? Почему вы решили заниматься именно этим?
-  //-     div(contentEditable).i-textarea
-  //-     h5 Какая у вас миссия?
-  //-     div(contentEditable).i-textarea
-  //-     h5 Какие услуги вас интерисуют больше всего?
-  //-     div(contentEditable).i-textarea
-  //-     h5 Какие у вас задачи?
-  //-     p Какую задачу вы хотите решить с помощью своего проекта? Какие задачи стоят перед вами сейчас?
-  //-     div(contentEditable).i-textarea
-  //-     h5 Какой путь решения задач вы видите?
-  //-     p Что вы делали раньше? Что хотите попробовать? Чего вы ожидаете от решения задач? В какие сроки вы хотите решить свои задачи и сколько планируете на это потратить?
-  //-     div(contentEditable).i-textarea
-  //-     h1(style="margin-top: 100px;") Контактные данные
-      //- .inputs
-      //-   div(style="width: 100%")
-      //-     div
-      //-       p Имя
-      //-       input()
-      //-     div
-      //-       p Телефон
-      //-       input()
-      //-   div(style="width: 100%")
-      //-     div
-      //-       p Компания
-      //-       input()
-      //-     div
-      //-       p Электронная почта
-      //-       input()
-  //-     .button-wrap
-  //-       button(type="submit").i-button Отправить бриф
+//- .brif
+//-   form(@submit.prevent="handleSubmit()")
+//-     h1(style="font-size: 56px; width: 60%; position: absolute; white-space: nowrap; margin-top: 0;") Бриф для новых клиентов izumi
+//-     p(style="margin-top: 100px;") {{ description }}
+//-     h5 Чем вы занимаетесь?
+//-     p Концепция проекта. В чем ваше отличие от конкурентов? Почему вы решили заниматься именно этим?
+//-     div(contentEditable).i-textarea
+//-     h5 Какая у вас миссия?
+//-     div(contentEditable).i-textarea
+//-     h5 Какие услуги вас интерисуют больше всего?
+//-     div(contentEditable).i-textarea
+//-     h5 Какие у вас задачи?
+//-     p Какую задачу вы хотите решить с помощью своего проекта? Какие задачи стоят перед вами сейчас?
+//-     div(contentEditable).i-textarea
+//-     h5 Какой путь решения задач вы видите?
+//-     p Что вы делали раньше? Что хотите попробовать? Чего вы ожидаете от решения задач? В какие сроки вы хотите решить свои задачи и сколько планируете на это потратить?
+//-     div(contentEditable).i-textarea
+//-     h1(style="margin-top: 100px;") Контактные данные
+    //- .inputs
+    //-   div(style="width: 100%")
+    //-     div
+    //-       p Имя
+    //-       input()
+    //-     div
+    //-       p Телефон
+    //-       input()
+    //-   div(style="width: 100%")
+    //-     div
+    //-       p Компания
+    //-       input()
+    //-     div
+    //-       p Электронная почта
+    //-       input()
+//-     .button-wrap
+//-       button(type="submit").i-button Отправить бриф
 </template>
 
 <script>
@@ -216,7 +328,7 @@ export default {
       description: 
       `
         Перед началом работы мы просим ответить клиентов на несколько вопросов.
-        Так мы поймем, чем можем быть полезны вам, какие услуги мы можем вам предложить.
+        Так мы поймём, чем можем быть полезны и какие услуги вам стоит предложить.
         После заполнения брифа наша встреча будет более продуктивной и ориентированной именно на вас.
       `,
       // 
@@ -255,12 +367,32 @@ export default {
     }
   },
   methods: {
-    handleSubmit() {
+    async handleSubmit() {
       console.log('brif submit')
+      const { data, error } = await this.$supabase
+        .from('brif')
+        .insert([
+          {
+            do: this.form.do,
+            mission: this.form.mission,
+            tasks: this.form.tasks,
+            name: this.form.name,
+            phone: this.form.phone,
+            company: this.form.company,
+            mail: this.form.mail,
+          },
+        ])
+      console.log('supabase', data, error)
     },
     nextStage() {
       // this.$log(this.form)
+      if (this.stage === 5) {
+        this.handleSubmit()
+      }
       this.stage += 1
+    },
+    lastStage() {
+      this.stage -= 1
     }
   }
 }

@@ -3,7 +3,7 @@
   @apply flex flex-row relative justify-start items-start;
   min-height: 100vh;
   background: #efefef;
-  padding: 0px 0px 0px 20px;
+  padding: 0px 0px 0px 50px;
   .content {
     @apply flex-col flex w-full justify-start;
     max-width: 1000px;
@@ -26,7 +26,7 @@
       @apply flex flex-row flex-wrap w-full justify-start;
       margin-top: 100px;
       .egg {
-        @apply flex flex-col;
+        @apply flex flex-col w-full;
         max-width: 45%;
         margin-right: 20px;
         &-number {
@@ -116,20 +116,37 @@
     padding-top: 50px;
   }
 }
+@media screen and (max-width: 600px) {
+  .page {
+    .content {
+      h1 {
+        font-size: 34px;
+      }
+      p {
+        font-size: 22px;
+      }
+      .blocks {
+        margin-top: 20px;
+      }
+    }
+  }
+}
 </style>
 <template lang="pug">
-  div(ref="page").page
-    .content
-      h1 Мы создаем бренд-платформы. Фокусируемся на брендинге и спецпроектах.
-      p А вот несколько <span>яичек</span>, почему мы и ваш бренд — это <span>perfect scramble</span>:
-      .blocks
-        div(v-for="(block, eggIndex) in blocks").egg
-          .egg-number
-            h1 {{block.number}}
-            div(v-for="egg in block.number")
-              .egg
-          .egg-content
-            p {{block.text}}
+div(ref="page").page
+  .content
+    h1 Мы создаём бренд-платформы. Фокусируемся на брендинге и спецпроектах.
+    p А вот несколько <span>яичек</span>, почему мы и ваш бренд — это <span>perfect scramble</span>:
+    .blocks
+      div(v-for="(block, eggIndex) in blocks").egg
+        .egg-number
+          h1 {{block.number}}
+          div(v-for="egg in block.number")
+            .egg
+        .egg-content
+          p {{block.text}}
+    h1(style="margin-top:100px; color: red") Ценности
+    p Эксперимент, Баланс, Критическое мышление
 </template>
 <script>
 export default {
@@ -137,10 +154,10 @@ export default {
   data() {
     return {
       blocks: [
-        { number: 1, text: 'мы знаем как привлекать миллениалов и зумеров, ведь мы сами родились на стыке поколений Y-Z'},
-        { number: 2, text: 'мы предоставляем клиентский сервис по цене фриланса'},
-        { number: 3, text: 'в проектах мы всегда отталкиваемся от вашего бюджета и бизнес-задач, а не от нашей комфортной планки'},
-        { number: 4, text: 'помимо агентства мы развиваем сообщество креативных предпринимателей, поэтому у нас есть большой ресурс для творческих коллабораций.'},
+        { number: 1, text: 'знаем как привлекать миллениалов и зумеров, ведь мы сами родились на стыке поколений Y-Z;'},
+        { number: 2, text: 'в проектах всегда отталкиваемся от вашего бюджета и бизнес-задач, а не от нашей комфортной планки;'},
+        { number: 3, text: 'умеем работать в атмосфере стартапа;'},
+        { number: 4, text: 'помимо агентства развиваем сообщество креаторов из России, поэтому у нас есть большой ресурс для творческих коллабораций.'},
       ]
     }
   },

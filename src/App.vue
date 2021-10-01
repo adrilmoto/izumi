@@ -1,11 +1,20 @@
 <style lang="scss">
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 9px;
 //  height: 13px;
 }
 ::-webkit-scrollbar-thumb {
- background: black;
-//  border-radius: 10px;
+ background-color: #191919;
+ border-radius: 100px;
+ border-top: 60px solid #efefef;
+//  box-shadow: inset 0 59px 0px #efefef;
+ border-right: 2px solid #efefef;
+//  outline: 1px solid #efefef;
+  @apply relative;
+}
+::-webkit-scrollbar-track {
+  background: #efefef;
+  margin-right: 2px;
 }
 body {
   padding: 0;

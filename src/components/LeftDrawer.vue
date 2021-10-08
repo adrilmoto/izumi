@@ -77,9 +77,10 @@
       .brif {
         @apply flex flex-col w-full items-start;
         padding-left: 0px;
+        // border: 1px solid red;
         padding-bottom: 20px;
         &-btn {
-          padding: 10px 10px 10px 0px;
+          // padding: 10px 10px 10px 0px;
           --color: #efefef;
           // padding-left: 70px;
           @apply flex flex-row items-center cursor-pointer;
@@ -92,8 +93,9 @@
             font-family: 'TT Commons ExtraBold';
             font-style: normal;
             font-weight: 900;
-            font-size: 44px;
-            line-height: 64px;
+            font-size: 42px;
+            line-height: 42px;
+            margin-top: 10px;
             // border: 1px solid red;
           }
           .toggle {
@@ -145,7 +147,7 @@
       // border: 1px solid red;
       padding-top: 100px;
       // right: 0;
-      @apply relative flex justify-start;
+      @apply relative flex justify-center;
     }
   }
 }

@@ -8,7 +8,7 @@ const routes = [
     path: '/',
     component: () => import('../layouts/PublicLayout.vue'),
     children: [
-      { path: '/', name: 'ГИФКА', component: () => import(/* webpackChunkName: "about" */ '../pages/Gif.vue') },
+      { path: '/', name: 'ИНТРО', component: () => import(/* webpackChunkName: "about" */ '../pages/Gif.vue') },
       { path: '/about', name: 'О НАС', component: () => import(/* webpackChunkName: "about" */ '../pages/About.vue') },
       { path: '/cases', name: 'КЕЙСЫ', component: () => import(/* webpackChunkName: "cases" */ '../pages/Cases.vue') },
       { path: '/services', name: 'УСЛУГИ', component: () => import(/* webpackChunkName: "servises" */ '../pages/Services.vue') },

@@ -191,7 +191,9 @@ export default {
         { 
           id: 0,
           name: 'Sixty',
-          img: 'sixty.png',
+          img: 'sixty/sixty.png',
+          guide: 'sixty/guide.pdf',
+          media: [ 'sixty/media_0.jpg', 'sixty/media_1.jpg' ],
           brif: `
             60-ая Параллель — компания, осуществляющая строительно-ремонтные работы с 1990 года, преимущественно на государственных заказах.
             Обратились с запросом создать качественную бренд-платформу новой ветки бизнеса (частный сектор) для запуска MVP.
@@ -215,7 +217,9 @@ export default {
         { 
           id: 1,
           name: 'Fosci',
-          img: 'fosci.png',
+          img: 'fosci/fosci.png',
+          guide: 'fosci/guide.pdf',
+          media: [ 'fosci/media_0.jpg', 'fosci/media_1.jpg', 'fosci/media_2.jpg', 'fosci/media_3.jpg', 'fosci/media_4.jpeg' ],
           brif: `
             Fosci — компания, разработавшая облачный сервис для автоматизации доставок рационов питания. Клиенты, производство, доставка, учёт, финансы — всё в одной системе.
             Обратилась с запросом на создание бренда. Задача — сделать компанию более понятной в коммуникации, найти новые точки соприкосновения с ЦА.
@@ -241,7 +245,9 @@ export default {
         { 
           id: 2,
           name: 'Делисервис',
-          img: 'deliservice.png',
+          img: 'deliservice/deliservice.png',
+          guide: 'deliservice/guide.pdf',
+          media: [ 'deliservice/media_0.jpg', 'deliservice/media_1.mp4', 'deliservice/media_2.mp4', 'deliservice/media_3.mp4', 'deliservice/media_4.mp4' ],
           brif: `
             Делисервис — партнёрская компания Делимобиль и Anytime Prime.
             Польза IT-стартапа заключается в обслуживании авто через мобильное приложение с функцией водителя.
@@ -269,7 +275,9 @@ export default {
         { 
           id: 3,
           name: 'Ampl',
-          img: 'ampl.png',
+          img: 'ampl/ampl.png',
+          guide: 'ampl/guide.pdf',
+          media: [ 'ampl/media_0.png', 'ampl/media_1.jpg', 'ampl/media_2.jpg', 'ampl/media_3.jpg', 'ampl/media_4.jpg' ],
           brif: `
             Клиент обратился с идеей запустить линейку уходовой косметики. Первый продукт — гель для роста бровей и ресниц.
             Наша цель — подготовить бренд-платформу для запуска сайта и проверки MVP.
@@ -294,7 +302,9 @@ export default {
         { 
           id: 4,
           name: 'Sirius',
-          img: 'sirius.png',
+          img: 'sirius/sirius.png',
+          guide: 'sirius/guide.pdf',
+          media: [ 'sirius/media_0.jpg', 'sirius/media_1.jpg', 'sirius/media_2.jpg' ],
           brif: `
             Sirius — относительно новый на рынке производитель навесных вентилируемых фасадов.
             Поступил запрос на качественную коммуникационную стратегию и перевод бренда в digital-формат.
@@ -318,7 +328,9 @@ export default {
         { 
           id: 5,
           name: 'Делимобиль',
-          img: 'deli.png',
+          img: 'deli/deli.png',
+          guide: null,
+          media: [ 'deli/media_0.jpeg', 'deli/media_1.jpeg', 'deli/media_2.jpeg', 'deli/media_3.jpeg', 'deli/media_4.mp4' ],
           brif: `
             Делимобиль — сервис поминутной аренды автомобилей (каршеринг). Текущая маркетинговая задача компании — привлечение миллениалов и зумеров, как новой аудитории.
             В агентство обратились за внедрением лаконичных антикризисных идей, направленных на развитие сообщества вокруг бренда.
@@ -341,7 +353,9 @@ export default {
         { 
           id: 6,
           name: 'Повод найдется',
-          img: 'povod.png',
+          img: 'povod/povod.png',
+          guide: 'povod/guide.pdf',
+          media: [ 'povod/media_0.jpg', 'povod/media_1.jpeg', 'povod/media_2.HEIC', 'povod/media_3.jpg' ],
           brif: `
             Компания Повод найдется — одна из первых и самых масштабных онлайн-доставок цветов в Москве. Обратились с запросом создать бренд-платформу для школы флористики и составить структуру образовательного курса.
           `,
@@ -365,7 +379,9 @@ export default {
         { 
           id: 7,
           name: 'HomeBro',
-          img: 'homebro.png',
+          img: 'homebro/homebro.png',
+          guide: null,
+          media: [ 'homebro/media_0.mp4', 'homebro/media_1.mp4', 'homebro/media_2.mp4' ],
           brif: `
             HomeBro — умный телеграм-бот, который помогает найти квартиру в Москве и Санкт-Петербурге совершенно бесплатно. Компания обратилась в агентство с целью создания видео для ТикТока, чтобы попробовать данную площадку для продвижения своих услуг.
           `,
@@ -388,7 +404,9 @@ export default {
         { 
           id: 8,
           name: 'DELI MUSIC DAY',
-          img: 'delimusicday.png',
+          img: 'delimusicday/delimusicday.png',
+          guide: null,
+          media: [ 'delimusicday/media_0.png', 'delimusicday/media_1.jpg' ],
           brif: `
             Летом 2020 команда Делимобиля запустила свежий формат для своих пользователей — драйв-ин фестиваль DELI MUSIC DAY. Задача состояла в том, чтобы поддержать мероприятие локальными нано-инфлюенсерами из Екатеринбурга с целью продажи билетов.  
           `,

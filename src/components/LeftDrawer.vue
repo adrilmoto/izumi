@@ -146,8 +146,25 @@
     .brif-container {
       // border: 1px solid red;
       padding-top: 100px;
+      position: relative !important;
       // right: 0;
-      @apply relative flex justify-center;
+      @apply flex justify-center w-full overflow-hidden;
+      .brif {
+        position: absolute;
+        left: calc(50% - 80px);
+        transform: translate(-50%, 0%);
+      }
+    }
+  }
+}
+@media screen and (max-width: 1300px) {
+  .drawer {
+    &-content {
+      .brif-container {
+        .brif {
+          left: 50%;
+        }
+      }
     }
   }
 }
@@ -169,9 +186,9 @@ div(ref="drawer").drawer
           div(style="transform: rotate(-5deg)")
             router-link(:to="route.path")  {{route.name}}
         .socials
-          .instagram
-          .telegram
-          .mail
+          a(href="https://instagram.com/voice.tag?utm_medium=copy_link" target="_blank").instagram
+          a(href="https://t.me/VOiCETAG" target="_blank").telegram
+          a(href="mailto:izumi.branding@gmail.com" target="_blank").mail
       .brif
         div(@click="openBrif()").brif-btn
           .text БРИФ
@@ -180,7 +197,7 @@ div(ref="drawer").drawer
         .politic
           a(href="").politic Политика конфиденциальности
     .brif-container
-      Brif(v-if="openedBrif")
+      Brif(v-if="openedBrif").brif
 </template>
 
 <script>

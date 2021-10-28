@@ -49,6 +49,41 @@
         opacity: 0.6;
       }
     }
+    .socials-btns {
+      @apply flex flex-row justify-center space-x-5;
+      margin-top: 30px;
+      z-index: 10000;
+      // padding-left: 40px;
+      // border: 1px solid red;
+      .telegram {
+        width: 30px;
+        height: 30px;
+        background: url('/images/icons/telegram_black.svg');
+        @apply bg-center bg-contain bg-no-repeat cursor-pointer;
+        &:hover {
+          transform: scale(0.9);
+        }
+      }
+      .mail {
+        width: 30px;
+        height: 30px;
+        background: url('/images/icons/mail_black.svg');
+        @apply bg-center bg-contain bg-no-repeat cursor-pointer;
+        &:hover {
+          transform: scale(0.9);
+        }
+      }
+      .instagram {
+        min-width: 30px;
+        min-height: 30px;
+        background-image: url('/images/icons/instagram_black.svg');
+        // border: 1px solid red;
+        @apply bg-center bg-contain bg-no-repeat cursor-pointer;
+        &:hover {
+          transform: scale(0.9);
+        }
+      }
+    }
   }
 }
 </style>
@@ -61,7 +96,11 @@
     button(@click="toggleMenu()").close
     div(v-for="(route, idx) in $router.options.routes[0].children" @click="link(route.path)").menu-link {{route.name}}
     div(@click="brifopen()").menu-link БРИФ
-  Brif(v-if="openedBrif" @close="brifopen()")
+    .socials-btns
+      a(href="https://instagram.com/voice.tag?utm_medium=copy_link" target="_blank").instagram
+      a(href="https://t.me/VOiCETAG" target="_blank").telegram
+      a(href="mailto:izumi.branding@gmail.com").mail
+  Brif(v-if="openedBrif" @close="brifopen(), toggleMenu()")
 </template>
 
 <script>

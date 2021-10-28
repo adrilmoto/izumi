@@ -4,7 +4,8 @@
   // overflow: hidden !important;
   // max-height: 100vh !important;
   &-content {
-    @apply w-full h-screen block;
+    @apply w-full h-screen;
+    display: block !important;
     max-width: calc(100% - 340px);
     position: relative;
   }

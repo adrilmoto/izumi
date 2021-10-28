@@ -77,7 +77,8 @@
       background: #e6c97b;
     }
     &:disabled {
-      background: rgb(102, 102, 102);
+      opacity: 0.6;
+      cursor: not-allowed;
     }
     &:active {
       background: #b99121;
@@ -181,7 +182,7 @@
     }
     .navbar {
       // padding: 0;
-      width: 94%;
+      width: 90%;
       // margin-top: 20px;
     }
     .content {
@@ -273,7 +274,7 @@ div(:style="{color: contentColor}").brif
         .congrats
       p Совсем скоро мы с вами свяжемся!
   .buttons-group
-    button(v-if="stage !== 6" @click="lastStage()" :disabled="btnDisabled").back-btn Назад
+    button(v-if="stage !== 6 && stage !== 1" @click="lastStage()" ).back-btn Назад
     button(v-if="stage !== 6" @click="nextStage()" :disabled="btnDisabled").btn {{btnText}}
 //- .brif
 //-   form(@submit.prevent="handleSubmit()")
@@ -345,6 +346,7 @@ export default {
   },
   watch: {
     stage: {
+      immediate: true,
       async handler() {
         await this.$nextTick()
         gsap.to(this.$refs.value, { maxWidth: 100/6 * this.stage + '%', duration: 1})
@@ -392,7 +394,7 @@ export default {
       this.stage += 1
     },
     lastStage() {
-      this.stage -= 1
+      if (this.stage > 1) this.stage -= 1
     }
   }
 }

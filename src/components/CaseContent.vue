@@ -1,13 +1,24 @@
 <style lang="scss" scoped>
+::-webkit-scrollbar-thumb {
+  background-color: #191919;
+  border-radius: 100px;
+  border-top: none;
+  //  box-shadow: inset 0 59px 0px #efefef;
+  border-right: none;
+  //  outline: 1px solid #efefef;
+    @apply relative;
+}
 .info {
   @apply w-full h-full;
   position: absolute;
   left: 50%;
-  overflow-y: scroll;
+  overflow: hidden;
+  padding-right: 10px;
   top: 50%;
   background: #efefef;
-  box-shadow: 11px 13px 16px 1px rgba(22, 22, 22, 0.15);
+  box-shadow: 11px 13px 16px 10px rgba(22, 22, 22, 0.15);
   border-radius: 20px;
+  border: 1px solid #eee;
   width: 0;
   height: 0;
   max-width: 90vw;
@@ -15,33 +26,49 @@
   transform: translate(-50%, -50%);
   z-index: 100000;
   // padding: 10px;
-  .close {
-    width: 40px;
-    border: 1px solid red;
-    height: 40px;
-    z-index: 9999;
-    opacity: 0.6;
-    // margin-bottom: -40px;
-    top: 10px;
-    left: 100%;
+  .header {
+    @apply flex flex-row justify-between items-center;
+    // padding: 10px 10px;
+    padding: 0px 20px;
     // border: 1px solid red;
-    // background: lime;
-    outline: none;
-    border: none;
-    background: url('/images/close.svg');
-    @apply sticky cursor-pointer bg-contain bg-center bg-no-repeat;
+    .close {
+      width: 40px;
+      height: 40px;
+      z-index: 9999;
+      opacity: 0.6;
+      right: 0;
+      background-color: lime;
+      outline: none;
+      border: none;
+      background: url('/images/close.svg');
+      @apply relative cursor-pointer bg-contain bg-center bg-no-repeat;
+      &:hover {
+        opacity: 1;
+      }
+    }
+    h1 {
+      font-size: 62px;
+      line-height: 120%;
+      margin: 0;
+      margin-top: 10px;
+      padding: 0;
+    }
   }
   &-content {
+    overflow-y: scroll !important;
+    max-height: 700px;
+    height: 100%;
+    border: 1px solid red;
     opacity: 0;
-    padding: 25px;
-    @apply relative flex flex-row;
+    padding: 0px 25px;
+    // padding-bottom: 50px;
+    @apply flex flex-row;
     .left {
-      @apply flex flex-col w-full;
-      h1 {
-        font-size: 62px;
-        margin: 0;
-        margin-bottom: 10px;
-      }
+      @apply flex flex-col relative w-full;
+      // padding-top: 30px;
+      // height: 100%;
+      border: 1px solid red;
+      // padding-bottom: 100px;
       h2 {
         font-family: 'TT Commons ExtraBold';
         font-style: normal;
@@ -67,10 +94,11 @@
     }
     .right {
       @apply flex w-full;
-      padding-top: 80px;
+      max-width: 600px;
+      // padding-top: 80px;
       // padding: 40px 0px;
       .img-container {
-        @apply w-full h-full flex justify-center items-center;
+        @apply w-full flex justify-center items-center;
         border: 1px solid rgb(78, 78, 78);
         background: rgba(0,0,0,0.4);
         border-radius: 10px;
@@ -110,23 +138,25 @@
 
 <template lang="pug">
 div(ref="el").info
-  button(@click="close()").close
+  .header
+    h1 {{caseInfo.name}}
+    button(@click="close()").close
   div(ref="content" v-if="opened").info-content
-    .left
-      h1 {{caseInfo.name}}
-      h2(:style="{color: page.color}") Бриф
-      p {{caseInfo.brif}}
-      h2(:style="{color: page.color}") Креативная идея
-      p {{caseInfo.creative}}
+    .content-block
+      .left 
+        h2(:style="{color: page.color}") Бриф
+        p {{caseInfo.brif}}
+        h2(:style="{color: page.color}") Креативная идея
+        p {{caseInfo.creative}}
+      .right
+        div(style="background: url('')").img-container
+    .content-block
       h2(:style="{color: page.color}") Реализация
       p {{caseInfo.release}}
       h2(:style="{color: page.color}") Итоги
       p {{caseInfo.results}}
       h2(:style="{color: page.color}") Ссылки
       a(v-for="link in caseInfo.links" :href="link.url" target="_blanck") {{link.name}}
-    .right
-      .img-container
-        h1 media content coming soon
 </template>
 
 <script>
@@ -154,11 +184,11 @@ export default {
       this.opened = true
       gsap.to(this.$refs.el, { duration: 0.3, position: 'fixed', top: '50%', left: '50%', width: '100%', height: '100%'})
       await this.$wait(300)
-      gsap.to(this.$refs.content, { duration: 1, opacity: 1,})
+      gsap.to(this.$refs.content, { duration: 0.2, opacity: 1,})
     },
     async close() {
       this.opened = false
-      gsap.to(this.$refs.el, { duration: 0.3, top: '50%', left: '50%', width: '0%', height: '0%'})
+      gsap.to(this.$refs.el, { duration: 0, opacity: 0, width: '200%', height: '200%'})
       await this.$wait(300)
       this.$emit('close')
     }

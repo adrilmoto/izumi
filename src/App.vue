@@ -1,8 +1,9 @@
 <style lang="scss">
 ::-webkit-scrollbar {
   width: 9px;
-//  height: 13px;
+  height: 0px !important;
 }
+
 ::-webkit-scrollbar-thumb {
  background-color: #191919;
 //  border-radius: 100px;
@@ -98,6 +99,10 @@ export default {
   async mounted() {
     console.log('mounted')
     await this.$store.dispatch('metaAboutGet')
+    // this.$nextTick(() => {
+    //   console.log('window.Chatra', window.Chatra)
+    //   window.Chatra('sendAutoMessage', 'Fuck you motherfucker')
+    // })
   }
 }
 </script>

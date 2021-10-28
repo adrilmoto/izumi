@@ -371,21 +371,20 @@ export default {
   },
   methods: {
     async handleSubmit() {
-      console.log('brif submit')
-      // const { data, error } = await this.$supabase
-      //   .from('brif')
-      //   .insert([
-      //     {
-      //       do: this.form.do,
-      //       mission: this.form.mission,
-      //       tasks: this.form.tasks,
-      //       name: this.form.name,
-      //       phone: this.form.phone,
-      //       company: this.form.company,
-      //       mail: this.form.mail,
-      //     },
-      //   ])
-      // console.log('supabase', data, error)
+      console.log('handleSubmit brif submit', this.form)
+      const message = `
+We will contact you!
+Company: ${this.form.company},
+Doing: ${this.form.do},
+Mission: ${this.form.mission},
+Name: ${this.form.name},
+Email: ${this.form.mail},
+Phone: ${this.form.phone},
+Tasks: ${this.form.tasks},
+      `
+      console.log('handleSubmit message', message)
+      window.Chatra('sendAutoMessage', 'Nice to see your brief! Well contact you!')
+      window.Chatra('updateIntegrationData', this.form)
     },
     nextStage() {
       // this.$log(this.form)

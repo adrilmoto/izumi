@@ -1,28 +1,4 @@
 <style lang="scss">
-.case-markdown-wrapper {
-  @apply relative flex flex-col flex-wrap w-full items-start content-start;
-  // max-height: 100vh;
-  // max-height: 150vh;
-  
-  width: 100%;
-  // max-width: 50vw;
-  p {
-    @apply flex;
-    max-width: 500px;
-    padding: 16px 0;
-    margin: 0;
-    font-size: 24px;
-  }
-  img {
-    width: 550px;
-    max-height: 300px;
-    object-fit: contain;
-    background: rgb(240, 240, 240);
-  }
-  video {
-    width: 100%;
-  }
-}
 .page-case-wrapper {
   @apply relative flex flex-row w-full justify-center;
   // max-height: 100vh;
@@ -30,6 +6,35 @@
   .wrapper {
     @apply w-full flex flex-col;
     max-width: 1100px;
+    h1 {
+      font-size: 48px;
+    }
+    .case-markdown-wrapper {
+      @apply relative flex flex-col flex-wrap w-full items-start content-start;
+      // max-height: 100vh;
+      // max-height: 150vh;
+      padding-bottom: 100px;
+      width: 100%;
+      // max-width: 50vw;
+      
+      p {
+        @apply flex;
+        max-width: 500px;
+        padding: 16px 0;
+        margin: 0;
+        font-size: 24px;
+      }
+      img {
+        width: auto;
+        max-height: 400px;
+        object-fit: contain;
+        background: rgb(240, 240, 240);
+      }
+      video {
+        width: 100%;
+        max-width: 500px;
+      }
+    }
   }
   // padding: 40px;
 }
@@ -38,7 +43,7 @@
 <template lang="pug">
 div(
   v-if="caseItem"
-  ).page-case-wrapper.br
+  ).page-case-wrapper
   .wrapper
     //- title
     h1 {{ caseItem.name }}

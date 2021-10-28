@@ -115,80 +115,36 @@
 }
 /* appearance fixes */
 </style>
+
 <template lang="pug">
 div(ref="page" class="page")
   .page-wrapper
-    div(v-for="(block, blockId) in blocks" :key="blockId" :style="{borderLeft: `13px solid ${block.color}`}").service-block
-      h1 {{block.name}}
-      p(v-html="block.description")
+    div(
+      v-for="(block, blockId) in services"
+      :key="block.id"
+      :style="{borderLeft: `13px solid ${block.color.hex}`}"
+      ).service-block
+      h1 {{block.title}}
+      p(v-html="block.subtitle")
       .tabs
-        div(v-for="(tab, tabId) in block.tabs" :key="tabId").tab
+        div(v-for="(tab, tabI) in block.bullets" :key="tabI").tab
           p {{tab}}
-      div(:style="{background: `${block.color}`}").mobile
+      div(:style="{background: `${block.color.hex}`}").mobile
 </template>
+
 <script>
 export default {
   name: 'Services',
   data() {
     return {
-      blocks: [
-        {
-          id: 0,
-          name: 'Brand platform',
-          description: `Разработка <span style="color: #52427A;">бренд-стратегии</span> для стартапа, новой ветки бизнеса или осуществление <span style="color: #52427A;">ребрендинга</span>`,
-          tabs: [
-            'CustDev',
-            'Позиционирование',
-            'Нейминг',
-            'Коммуникационная стратегия',
-            'Фирменный стиль',
-            'Визуальная концепция',
-            'Брендбук',
-            'Бренд-менеджмент на аутсорсе',
-          ],
-          color: '#EABE44'
-        },
-        {
-          id: 1,
-          name: 'Special Project',
-          description: 'Разработка любой бренд-коммуникации под ключ: концепция, реализация, аналитика',
-          tabs: [],
-          color: '#E29229'
-        },
-        {
-          id: 2,
-          name: 'Стратегия',
-          description: 'influence, creative, content, community, PR',
-          tabs: [],
-          color: '#CE5236'
-        },
-        {
-          id: 3,
-          name: 'Дизайн',
-          description: 'graph, web, motion, 3D',
-          tabs: [],
-          color: '#6362A0'
-        },
-        {
-          id: 4,
-          name: 'Продакшен',
-          description: 'style, photo, video, sound',
-          tabs: [],
-          color: '#52427A'
-        },
-        {
-          id: 5,
-          name: 'Социальные сети',
-          description: 'visual concept, texts, stories',
-          tabs: [],
-          color: '#EABE44'
-        }
-      ]
+      services: [],
     }
   },
   methods: {
   },
-  mounted() {
+  async mounted() {
+    console.log('mounted')
+    this.services = await this.$store.dispatch('servicesGet')
   },
   beforeDestroy() {
   }

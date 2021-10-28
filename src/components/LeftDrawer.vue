@@ -192,10 +192,10 @@ div(ref="drawer").drawer
           ).menu-link
           div(style="transform: rotate(-5deg)")
             router-link(:to="r.path")  {{r.meta.name}}
-        .socials
-          a(href="https://instagram.com/voice.tag?utm_medium=copy_link" target="_blank").instagram
-          a(href="https://t.me/VOiCETAG" target="_blank").telegram
-          a(href="mailto:izumi.branding@gmail.com" target="_blank").mail
+        div(v-if="metaAbout").socials
+          a(:href="metaAbout.link_instagram" target="_blank").instagram
+          a(:href="metaAbout.link_telegram" target="_blank").telegram
+          a(:href="metaAbout.link_email" target="_blank").mail
       .brif
         div(@click="openBrif()").brif-btn
           .text БРИФ
@@ -231,6 +231,9 @@ export default {
     },
     route () {
       return this.$route
+    },
+    metaAbout () {
+      return this.$store.state.metaAbout
     }
   },
   watch: {

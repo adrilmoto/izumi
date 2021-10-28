@@ -50,16 +50,18 @@
   }
 }
 </style>
+
 <template lang="pug">
 div(ref="layout").layout
   LeftDrawer().desktop
   Header().mobile
   div(ref="content" :style="{ overflowY: $route.path !== '/' ? 'scroll' : 'hidden' }").layout-content
     router-view()
-  div(v-if="$route.path !== '/'").left-block
+  //- div(v-if="$route.path !== '/'").left-block
     p {{route}}
     LogoMobile(color="#191919")
 </template>
+
 <script>
 import LeftDrawer from '@/components/LeftDrawer.vue'
 import Header from '@/components/Header.vue'

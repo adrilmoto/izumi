@@ -151,45 +151,30 @@
 div(ref="page").page
   //- DialogCase(v-if="openedCase" @close="openCase()" :dialogInfo="dialogInfo")
   .page-wrapper
-    h2 BRAND PLATFORMS
-    .cases
-      div(
-        v-for="(p, pi) in projects"
-        v-if="p.img"
-        :key="p.id"
-        :style="{backgroundImage: `url('${p.img.url}')`}"
-        ).case
-        h6 {{p.name}}
-        div(@click="$router.push(`/cases/${p.id}`)").case-open
-        //- CaseContent(v-if="block.id === currentCase" :caseInfo="block" @close="closeCase()")
-    //- h2 SPECIAL PROJECTS
-    //- .cases
-      div(
-        v-for="(block, caseId) in specialProjects"
-        :key="caseId"
-        :class="[!openedCase ? 'anim' : '']"
-        :style="{backgroundImage: `url('/images/cases/${block.img}')`}"
-      ).case
-        h6 {{block.name}}
-        div(v-if="!openedCase" @click="openCase(block)").case-open
-        CaseContent(v-if="block.id === currentCase" :caseInfo="block" @close="closeCase()")
+    div(
+      v-for="(c,ci) in categories" :key="c.id"
+      ).flex.flex-row.flex-wrap.w-full
+      h2 {{c.name}}
+      .cases
+        div(
+          v-for="(p, pi) in projects"
+          v-if="p.img && p.caseCategory && p.caseCategory.id === c.id"
+          :key="p.id"
+          :style="{backgroundImage: `url('${p.img.url}')`, marginBottom: '32px'}"
+          ).case.anim
+          h6 {{p.name}}
+          div(@click="$router.push(`/cases/${p.id}`)").case-open
     p <span>Некоторые из наших кейсов</span> — ещё не запущенные стартапы, и мы сохраняем конфиденциальность и не публикуем их до запуска.
 </template>
 
 <script>
-import DialogCase from '@/components/DialogCase.vue'
-import CaseContent from '@/components/CaseContent.vue'
-
 export default {
   name: 'Cases',
   components: {
-    DialogCase,
-    CaseContent
   },
   data() {
     return {
-      currentCase: null,
-      openedCase: false,
+      categories: [],
       projects: []
     }
   },
@@ -198,19 +183,9 @@ export default {
   watch: {
   },
   methods: {
-    openCase(block) {
-      this.openedCase = true
-      console.log('open')
-      this.currentCase = block.id
-    },
-    closeCase() {
-      console.log('close')
-      this.openedCase = false
-      this.currentCase = null
-      // gsap.to(this.$refs[payload.name], { left: 'none', top: 'none', duration: 0.3,})
-    }
   },
   async mounted() {
+    this.categories = await this.$store.dispatch('categoriesGet')
     this.projects = await this.$store.dispatch('casesGet')
   }
 }

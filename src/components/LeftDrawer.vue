@@ -174,17 +174,24 @@
 div(ref="drawer").drawer
   .drawer-content
     .drawer-content-left
-      div(v-for="(log, logIndex) in 4" :key="logIndex")
-        Logo(:color="logIndex === page.id ? page.color : '#efefef'").logo
+      div(
+        v-for="(r, ri) in $router.options.routes[0].children"
+        v-if="r.meta"
+        :key="r.path"
+        :style="{cursor: 'pointer'}"
+        @click="$router.push(r.path)")
+        Logo(:color="r.path === route.path ? r.meta.color : '#efefef'").logo
     .drawer-content-right
       .menu
         div(
-          v-for="(route, idx) in $router.options.routes[0].children"
-          :style="{background: idx === page.id ? page.color : '', transform: 'rotate(5deg)'}"
+          v-for="(r, ri) in $router.options.routes[0].children"
+          v-if="r.meta"
+          :key="r.path"
+          :style="{background: r.path === route.path ? r.meta.color : 'none', transform: 'rotate(5deg)'}"
           @click="openedBrif = false"
-        ).menu-link
+          ).menu-link
           div(style="transform: rotate(-5deg)")
-            router-link(:to="route.path")  {{route.name}}
+            router-link(:to="r.path")  {{r.meta.name}}
         .socials
           a(href="https://instagram.com/voice.tag?utm_medium=copy_link" target="_blank").instagram
           a(href="https://t.me/VOiCETAG" target="_blank").telegram
@@ -192,7 +199,7 @@ div(ref="drawer").drawer
       .brif
         div(@click="openBrif()").brif-btn
           .text БРИФ
-          div(ref="toggle" :style="{background: page.color}").toggle
+          div(ref="toggle" :style="{background: route.meta.color}").toggle
             div(ref="toggle-ball").ball
         .politic
           a(href="").politic Политика конфиденциальности
@@ -222,6 +229,9 @@ export default {
     page() {
       return this.$store.state.page
     },
+    route () {
+      return this.$route
+    }
   },
   watch: {
     '$route.path': {

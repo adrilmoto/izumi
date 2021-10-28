@@ -86,15 +86,17 @@ h3 {
   }
 }
 </style>
+
 <template lang="pug">
-  <div id="app">
-    <router-view/>
-  </div>
+div(id="app")
+  router-view
 </template>
+
 <script>
 export default {
-  name: 'app',
+  name: 'App',
   mounted() {
+    console.log('mounted')
   }
 }
 </script>

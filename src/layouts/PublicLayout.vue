@@ -80,14 +80,14 @@ export default {
       scrollTop: null,
     }
   },
-  watch: {
-    '$route.path': {
-      immediate: true,
-      handler(to) {
-        this.$store.dispatch('setColor', to)
-      }
-    }
-  },
+  // watch: {
+  //   '$route.path': {
+  //     immediate: true,
+  //     handler(to) {
+  //       this.$store.dispatch('setColor', to)
+  //     }
+  //   }
+  // },
   computed: {
     route() {
       return this.$route.name

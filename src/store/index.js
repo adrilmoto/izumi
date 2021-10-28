@@ -1,46 +1,66 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
 
 Vue.use(Vuex)
 
+const caseFragment = `
+id
+img {
+  url
+}
+caseCategory {
+  name
+}
+media {
+  url
+}
+guide {
+  url
+}
+name
+description {
+  markdown
+}
+caseLinks {
+  id type url
+}
+`
+
 export default new Vuex.Store({
   state: {
-    page: {
-      id: '',
-      color: ''
-    }
   },
   mutations: {
-    COLOR_SET: (state, payload) => {
-      state.page.id = payload.id
-      state.page.color = payload.color
-    }
   },
   actions: {
-    setColor({ commit }, path) {
-      let page = {
-        id: 0,
-        color: ''
-      }
-      if (path === '/') { 
-        page.id = 0
-        page.color = '#6362A0'
-      }
-      if (path === '/about') {
-        page.id = 1
-        page.color = '#EABE44'
-      }
-      if (path === '/cases') {
-        page.id = 2
-        page.color = '#CE5236'
-      }
-      if (path === '/services') {
-        page.id = 3
-        page.color = '#52427A'
-      }
-      commit('COLOR_SET', page)
+    async casesGet () {
+      console.log('casesGet start')
+      const { data: { data: { cases } } } = await axios.post('', {
+        query: `
+          query {
+            cases {
+              ${caseFragment}
+            }
+          }
+        `
+      })
+      // console.log('casesGet :done', cases)
+      return cases
+    },
+    async caseGet ({ dispatch }, id) {
+      console.log('caseGet :start', id)
+      if (!id) return null
+      const { data: { data: { cases } } } = await axios.post('', {
+        query: `
+          query {
+            cases (where: {id: "${id}"}) {
+              ${caseFragment}
+            }
+          }
+        `
+      })
+      // console.log('caseGet done', cases)
+      return cases[0] || null
     }
-  },
-  modules: {
   }
 })

@@ -315,6 +315,7 @@ div(:style="{color: contentColor}").brif
 
 <script>
 import gsap from 'gsap'
+
 export default {
   name: 'Brif',
   props: {
@@ -371,20 +372,20 @@ export default {
   methods: {
     async handleSubmit() {
       console.log('brif submit')
-      const { data, error } = await this.$supabase
-        .from('brif')
-        .insert([
-          {
-            do: this.form.do,
-            mission: this.form.mission,
-            tasks: this.form.tasks,
-            name: this.form.name,
-            phone: this.form.phone,
-            company: this.form.company,
-            mail: this.form.mail,
-          },
-        ])
-      console.log('supabase', data, error)
+      // const { data, error } = await this.$supabase
+      //   .from('brif')
+      //   .insert([
+      //     {
+      //       do: this.form.do,
+      //       mission: this.form.mission,
+      //       tasks: this.form.tasks,
+      //       name: this.form.name,
+      //       phone: this.form.phone,
+      //       company: this.form.company,
+      //       mail: this.form.mail,
+      //     },
+      //   ])
+      // console.log('supabase', data, error)
     },
     nextStage() {
       // this.$log(this.form)

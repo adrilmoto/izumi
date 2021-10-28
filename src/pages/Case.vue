@@ -1,17 +1,21 @@
 <style lang="scss">
 .case-markdown-wrapper {
-  @apply relative;
+  @apply relative flex flex-col flex-wrap w-full items-start content-start;
+  // max-height: 100vh;
+  // max-height: 150vh;
+  background: #efefef;
   width: 100%;
-  max-width: 600px;
+  // max-width: 50vw;
   p {
     @apply flex;
     max-width: 500px;
     padding: 16px 0;
     margin: 0;
+    font-size: 24px;
   }
   img {
-    width: 100%;
-    max-height: 400px;
+    width: 550px;
+    max-height: 300px;
     object-fit: contain;
     background: rgb(240, 240, 240);
   }
@@ -19,20 +23,29 @@
     width: 100%;
   }
 }
+.page-case-wrapper {
+  @apply relative flex flex-row w-full justify-center;
+  max-height: 100vh;
+  .wrapper {
+    @apply w-full flex flex-col;
+    max-width: 1100px;
+  }
+  // padding: 40px;
+}
 </style>
 
 <template lang="pug">
 div(
   v-if="caseItem"
-  :style="{padding: '40px', overflowY: 'scroll', overflowX: 'hidden'}"
-  ).relative.flex.flex-row.flex-wrap.items-start.content-start.p-4.w-full
-  //- title
-  h1(class="ml-8") {{ caseItem.name }}
-  //- video(src="https://media.graphcms.com/OIiBzxjJTrOvA7sos987" type="video/mp4" autoplay).w-full.br
-  div(
-    ref="caseMarkdownWrapper"
-    v-html="caseItem.description.html").case-markdown-wrapper.flex.flex-row.flex-wrap.w-full.items-start.content-start
-  //- links
+  ).page-case-wrapper.br
+  .wrapper
+    //- title
+    h1 {{ caseItem.name }}
+    //- video(src="https://media.graphcms.com/OIiBzxjJTrOvA7sos987" type="video/mp4" autoplay).w-full.br
+    div(
+      ref="caseMarkdownWrapper"
+      v-html="caseItem.description.html").case-markdown-wrapper
+    //- links
 </template>
 
 <script>

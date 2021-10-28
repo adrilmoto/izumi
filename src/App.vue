@@ -5,10 +5,10 @@
 }
 ::-webkit-scrollbar-thumb {
  background-color: #191919;
- border-radius: 100px;
- border-top: 60px solid #efefef;
-//  box-shadow: inset 0 59px 0px #efefef;
- border-right: 2px solid #efefef;
+//  border-radius: 100px;
+//  border-top: 60px solid #efefef;
+// //  box-shadow: inset 0 59px 0px #efefef;
+//  border-right: 2px solid #efefef;
 //  outline: 1px solid #efefef;
   @apply relative;
 }

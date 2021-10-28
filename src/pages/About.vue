@@ -1,7 +1,8 @@
 <style lang="scss" scoped>
 .page {
-  @apply flex flex-row relative justify-start items-start;
+  @apply flex flex-row relative justify-start items-start w-full;
   min-height: 100vh;
+  min-width: 70vh;
   background: #efefef;
   padding: 0px 0px 0px 50px;
   .content {

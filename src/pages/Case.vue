@@ -3,7 +3,7 @@
   @apply relative flex flex-col flex-wrap w-full items-start content-start;
   // max-height: 100vh;
   // max-height: 150vh;
-  background: #efefef;
+  
   width: 100%;
   // max-width: 50vw;
   p {
@@ -25,7 +25,8 @@
 }
 .page-case-wrapper {
   @apply relative flex flex-row w-full justify-center;
-  max-height: 100vh;
+  // max-height: 100vh;
+  background: #efefef;
   .wrapper {
     @apply w-full flex flex-col;
     max-width: 1100px;

@@ -31,10 +31,54 @@ caseLinks {
 
 export default new Vuex.Store({
   state: {
+    metaAbout: null,
   },
   mutations: {
+    SET_STATE: (state, [key, val]) => {
+      state[key] = val
+    }
   },
   actions: {
+    async metaAboutGet ({commit}) {
+      console.log('metaAboutGet :start')
+      const { data: { data: { metaAbouts } } } = await axios.post('', {
+        query: `
+          query {
+            metaAbouts {
+              id
+              title
+              subtitle
+              bullets
+              title_values
+              values
+              link_email
+              link_telegram
+              link_instagram
+            }
+          }
+        `
+      })
+      console.log('metaAboutGet :done', metaAbouts)
+      // return metaAbouts[0] || null
+      commit('SET_STATE', ['metaAbout', metaAbouts[0] || null])
+    },
+    async servicesGet () {
+      console.log('servicesGet')
+      const { data: { data: { services } } } = await axios.post('', {
+        query: `
+          query {
+            services {
+              id
+              title
+              subtitle
+              bullets
+              color { hex }
+            }
+          }
+        `
+      })
+      return services
+    },
     async categoriesGet () {
       console.log('categoriesGet :start')
       const { data: { data: { caseCategories } } } = await axios.post('', {

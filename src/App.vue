@@ -95,8 +95,9 @@ div(id="app")
 <script>
 export default {
   name: 'App',
-  mounted() {
+  async mounted() {
     console.log('mounted')
+    await this.$store.dispatch('metaAboutGet')
   }
 }
 </script>

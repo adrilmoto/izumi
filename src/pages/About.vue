@@ -2,7 +2,7 @@
 .page {
   @apply flex flex-row relative justify-start items-start w-full;
   min-height: 100vh;
-  min-width: 70vh;
+  min-width: 70vw;
   background: #efefef;
   padding: 0px 0px 0px 50px;
   .content {
@@ -42,7 +42,7 @@
           .egg {
             background: url('/images/egg.svg');
             min-width: 80px;
-            margin-left: -65px;
+            margin-left: -45px;
             margin-top: 15px;
             height: 80px;
             @apply bg-center bg-contain bg-no-repeat;
@@ -79,6 +79,7 @@
       .blocks {
         @apply flex flex-row flex-wrap w-full justify-start;
         margin-top: 100px;
+        max-width: 600px;
         .egg {
           @apply flex flex-col;
           max-width: 100%;
@@ -95,7 +96,7 @@
             .egg {
               background: url('/images/egg.svg');
               min-width: 80px;
-              margin-left: -65px;
+              margin-left: -45px;
               margin-top: 15px;
               height: 80px;
               @apply bg-center bg-contain bg-no-repeat;
@@ -133,27 +134,32 @@
   }
 }
 </style>
+
 <template lang="pug">
 div(ref="page").page
-  .content
-    h1 Мы создаём бренд-платформы. Фокусируемся на брендинге и спецпроектах.
-    p А вот несколько <span>яичек</span>, почему мы и ваш бренд — это <span>perfect scramble</span>:
+  div(
+    v-if="metaAbout"
+  ).content
+    h1 {{metaAbout.title}}
+    p(style="max-width: 600px") А вот несколько <span>яичек</span>, почему мы и ваш бренд — это <span>perfect scramble</span>:
     .blocks
-      div(v-for="(block, eggIndex) in blocks").egg
+      div(v-for="(b, bi) in metaAbout.bullets").egg
         .egg-number
-          h1 {{block.number}}
-          div(v-for="egg in block.number")
+          h1 {{bi+1}}
+          div(v-for="e in bi+1")
             .egg
         .egg-content
-          p {{block.text}}
-    h1(style="margin-top:100px; color: red") Ценности
-    p Эксперимент, Баланс, Критическое мышление
+          p {{b}}
+    h1(style="margin-top:100px; color: red") {{metaAbout.title_values}}
+    p {{metaAbout.values}}
 </template>
+
 <script>
 export default {
   name: 'About',
   data() {
     return {
+      // metaAbout: null,
       blocks: [
         { number: 1, text: 'знаем как привлекать миллениалов и зумеров, ведь мы сами родились на стыке поколений Y-Z;'},
         { number: 2, text: 'в проектах всегда отталкиваемся от вашего бюджета и бизнес-задач, а не от нашей комфортной планки;'},
@@ -162,10 +168,15 @@ export default {
       ]
     }
   },
-  computed: {},
+  computed: {
+    metaAbout () {
+      return this.$store.state.metaAbout
+    }
+  },
   methods: {
   },
   async mounted() {
+    // this.metaAbout = await this.$store.dispatch('metaAboutGet')
   },
   beforeDestroy() {
   }

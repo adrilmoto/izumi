@@ -94,7 +94,11 @@
     button(@click="toggleMenu()").btn-menu
   div(v-if="showMenu").menu
     button(@click="toggleMenu()").close
-    div(v-for="(route, idx) in $router.options.routes[0].children" @click="link(route.path)").menu-link {{route.name}}
+    div(
+      v-for="(route, idx) in $router.options.routes[0].children"
+      v-if="route.meta.name"
+      @click="link(route.path)"
+    ).menu-link {{route.name}}
     div(@click="brifopen()").menu-link БРИФ
     .socials-btns
       a(href="https://instagram.com/voice.tag?utm_medium=copy_link" target="_blank").instagram
@@ -120,23 +124,14 @@ export default {
     }
   },
   watch: {
-    '$route.path': {
-      handler(to) {
-        if (to)
-          this.showMenu = !this.showMenu
-      }
-    }
   },
   methods: {
     toggleMenu() {
       this.showMenu = !this.showMenu
     },
     link(path) {
-      if (this.$route.path === path) {
-        this.toggleMenu()
-        return
-      }
       this.$router.push(path)
+      this.toggleMenu()
     },
     brifopen() {
       this.openedBrif = !this.openedBrif

@@ -3,6 +3,7 @@
   @apply flex flex-row justify-start;
   min-height: calc(100vh - 50px);
   padding-bottom: 50px;
+  min-width: 70vw;
   // overflow-y: scroll;
   background: #efefef;
   // padding: 20px;

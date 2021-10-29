@@ -176,18 +176,18 @@ div(ref="drawer").drawer
     .drawer-content-left
       div(
         v-for="(r, ri) in $router.options.routes[0].children"
-        v-if="r.meta"
+        v-if="r.meta.name"
         :key="r.path"
         :style="{cursor: 'pointer'}"
         @click="$router.push(r.path)")
-        Logo(:color="r.path === route.path ? r.meta.color : '#efefef'").logo
+        Logo(:color="r.path === route.path || route.name === 'Case' ? r.meta.color : '#efefef'").logo
     .drawer-content-right
       .menu
         div(
           v-for="(r, ri) in $router.options.routes[0].children"
-          v-if="r.meta"
+          v-if="r.meta.name"
           :key="r.path"
-          :style="{background: r.path === route.path ? r.meta.color : 'none', transform: 'rotate(5deg)'}"
+          :style="{background: r.path === route.path || route.name === 'Case' ? r.meta.color : 'none', transform: 'rotate(5deg)'}"
           @click="openedBrif = false"
           ).menu-link
           div(style="transform: rotate(-5deg)")

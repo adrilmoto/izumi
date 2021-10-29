@@ -150,8 +150,8 @@ div(ref="page").page
             .egg
         .egg-content
           p {{b}}
-    h1(style="margin-top:100px; color: red") {{metaAbout.title_values}}
-    p {{metaAbout.values}}
+    //- h1(style="margin-top:100px; color: red") {{metaAbout.title_values}}
+    //- p {{metaAbout.values}}
 </template>
 
 <script>

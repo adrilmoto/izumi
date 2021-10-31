@@ -1,27 +1,30 @@
 <style lang="scss" scoped>
 .page {
   @apply flex flex-row justify-start;
-  min-height: calc(100vh - 50px);
-  padding-bottom: 50px;
+  min-height: calc(100vh - 0px);
+  // padding-bottom: 50px;
   min-width: 70vw;
   // overflow-y: scroll;
   background: #efefef;
   // padding: 20px;
   padding-left: 30px;
+  // border: 1px solid red;
   &-wrapper {
-    // border: 1px solid red;
-    @apply w-full;
+    border: 1px solid red;
+    @apply w-full flex flex-col justify-start items-start;
     padding-right: 140px;
     // max-width: 1100px;
     h2 {
       font-size: 48px;
       margin-left: 20px;
       margin-bottom: 20px;
+      margin-top: 50px;
+      // border: 1px solid red;
       // margin-top: 50px;
     }
     p {
       font-size: 24px;
-      margin-top: 150px;
+      margin-top: 0px;
       margin-left: 20px;
       max-width: 800px;
       opacity: 0.8;

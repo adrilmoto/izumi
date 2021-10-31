@@ -2,10 +2,24 @@
 .page {
   background: url('/images/ponch.gif'), linear-gradient(180deg, rgba(177,181,181,1) 39%, rgba(170,174,174,1) 62%);
   overflow: hidden;
+  border: 1px solid red;
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
   @apply h-screen flex justify-center items-center bg-center bg-no-repeat bg-cover;
+  .route-name {
+    @apply absolute;
+    font-family: 'TT Commons ExtraBold';
+    right: 40px;
+    font-size: 36px;
+    color: #626294;
+    padding: 0 20px;
+    top: 60px;
+  }
   .menu {
-    @apply flex flex-row justify-center absolute space-x-2;
-    bottom: 10vh;
+    @apply flex flex-row flex-wrap justify-center absolute w-full;
+    bottom: 50px;
+    right: 40px;
     // border: 1px solid red;
     // display: none;
     white-space: nowrap;
@@ -21,6 +35,9 @@
     background-size: 140%;
     // @apply bg-contain;
     // @apply bg-contain;
+    .route-name {
+      display: none;
+    }
     .menu {
       // display: flex;
       margin: 0px 20px;
@@ -31,11 +48,18 @@
     }
   }
 }
+.aims {
+  font-family: 'Conthrax';
+  color: #626294;
+  padding: 0 20px;
+  @apply w-full flex justify-end;
+}
 </style>
 <template lang="pug">
   .page
+    .route-name {{route.name}}
     .menu
-      div(v-for="(aim, idx) in aims" :key="idx").menu-link {{aim}}
+      div(v-for="(aim, idx) in aims" :key="idx").aims {{aim}}
 </template>
 <script>
 export default {
@@ -43,9 +67,14 @@ export default {
   data() {
     return {
       aims: [
-        'Баланс', 'Эксперимент', 'Критическое мышление',
+        '.Баланс.Эксперимент.', '.Критическое мышление.',
       ]
     }
+  },
+  computed: {
+    route () {
+      return this.$route
+    },
   },
   methods: {
     link(path) {

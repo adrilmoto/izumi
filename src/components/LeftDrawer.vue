@@ -4,15 +4,27 @@
   background: #191919;
   min-width: 340px;
   max-width: 340px;
+  // height: 100vh;
   overflow: hidden;
   &-content {
-    @apply flex flex-row;
+    @apply flex flex-row h-screen;
     &-left {
-      @apply flex flex-col;
+      @apply flex flex-col relative justify-start items-start;
+      // max-height: 100vh;
+      max-height: 100vh;
+      height: 100%;
+      width: 90px;
+      // aspect-ratio: 1/2;
+      border: 1px solid red;
       .logo {
-        height: 26vh;
+        height: 25%;
+        width: 100%;
+        border: 1px solid red;
         margin-top: -10px;
         margin-left: -10px;
+        position: relative;
+        // background: url('/images/logo-izumi.svg');
+        // overflow: hidden;
         // max-width: 80px;
         // border: 1px solid red;
       }
@@ -30,6 +42,7 @@
           margin-left: 0px;
           margin-right: 0px;
           cursor: pointer;
+          text-decoration: none;
           a {
             text-decoration: none;
             font-size: 34px;
@@ -75,10 +88,10 @@
         }
       }
       .brif {
-        @apply flex flex-col w-full items-start;
+        @apply flex flex-col w-full items-start justify-center;
         padding-left: 0px;
         // border: 1px solid red;
-        padding-bottom: 20px;
+        margin-bottom: 50px;
         &-btn {
           // padding: 10px 10px 10px 0px;
           --color: #efefef;
@@ -86,7 +99,7 @@
           @apply flex flex-row items-center cursor-pointer;
           &:hover {
             // background: rgba(255, 255,255, 0.2);
-            --color: #cccccc;
+            opacity: 0.6;
           }
           .text {
             color: var(--color);
@@ -95,7 +108,7 @@
             font-weight: 900;
             font-size: 42px;
             line-height: 42px;
-            margin-top: 10px;
+            // margin-top: 10px;
             // border: 1px solid red;
           }
           .toggle {
@@ -115,30 +128,6 @@
               border-radius: 50%;
               background: var(--color);
             }
-          }
-        }
-        .politic {
-          // margin-left: 45px;
-          // border: 1px solid red;
-          // margin-top: 10px;
-          // height: 30px;
-          position: relative;
-          // width: 150px;
-          cursor: pointer;
-          text-decoration: none;
-          // position: absolute;
-          white-space: wrap;
-          white-space: pre-wrap;       /* css-3 */
-          white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-          white-space: -pre-wrap;      /* Opera 4-6 */
-          white-space: -o-pre-wrap;    /* Opera 7 */
-          word-wrap: break-word;      /* Internet Explorer 5.5+ */
-          font-size: 16px;
-          color: #efefef;
-          line-height: 16px;
-          margin-top: 20px;
-          &:hover {
-            opacity: 0.6;
           }
         }
       }
@@ -179,32 +168,31 @@ div(ref="drawer").drawer
         v-if="r.meta.name"
         :key="r.path"
         :style="{cursor: 'pointer'}"
-        @click="$router.push(r.path)")
-        Logo(:color="r.path === route.path || route.name === 'Case' ? r.meta.color : '#efefef'").logo
+        @click="$router.push(r.path).catch(e => {})").flex.flex-col.justify-start.items-start.h-full
+        //- Logo(:color="r.path === route.path ? r.meta.color : r.path === '/cases' && !route.meta.color ? '#CE5236' : '#efefef'")
+        .logo
     .drawer-content-right
       .menu
         div(
           v-for="(r, ri) in $router.options.routes[0].children"
           v-if="r.meta.name"
           :key="r.path"
-          :style="{background: r.path === route.path || route.name === 'Case' ? r.meta.color : 'none', transform: 'rotate(5deg)'}"
-          @click="openedBrif = false"
+          @click="$router.push(r.path).catch(e => {}), $store.dispatch('opneBrif', false)"
+          :style="{background: r.path === route.path ? r.meta.color : r.path === '/cases' && !route.meta.color ? '#CE5236' : 'none', transform: 'rotate(5deg)'}"
           ).menu-link
           div(style="transform: rotate(-5deg)")
-            router-link(:to="r.path")  {{r.meta.name}}
+            a {{r.meta.name}}
         div(v-if="metaAbout").socials
           a(:href="metaAbout.link_instagram" target="_blank").instagram
           a(:href="metaAbout.link_telegram" target="_blank").telegram
           a(:href="metaAbout.link_email" target="_blank").mail
       .brif
         div(@click="openBrif()").brif-btn
-          .text БРИФ
+          div(ref="toggleText").text БРИФ
           div(ref="toggle" :style="{background: route.meta.color}").toggle
             div(ref="toggle-ball").ball
-        .politic
-          a(href="").politic Политика конфиденциальности
     .brif-container
-      Brif(v-if="openedBrif").brif
+      Brif(v-if="brif").brif
 </template>
 
 <script>
@@ -222,18 +210,22 @@ export default {
   },
   data() {
     return {
-      openedBrif: false,
     }
   },
   computed: {
+    // highlightCalculate() {
+    // },
+    route() {
+      return this.$route
+    },
     page() {
       return this.$store.state.page
     },
-    route () {
-      return this.$route
-    },
     metaAbout () {
       return this.$store.state.metaAbout
+    },
+    brif () {
+      return this.$store.state.openedBrif
     }
   },
   watch: {
@@ -241,7 +233,6 @@ export default {
       immediate: true,
       async handler(to, from) {
         await this.$nextTick()
-        // if (this.openedBrif === false) return
         if (to === '/') {
           console.log('mini', to, from)
           gsap.to(this.$refs.drawer, { minWidth: window.innerWidth / 2 + 'px', duration: 1 })
@@ -250,19 +241,21 @@ export default {
         }
       }
     },
-    openedBrif: {
+    brif: {
       deep: true,
       async handler(to) {
         await this.$nextTick()
         if (to) {
           gsap.to(this.$refs.drawer, { minWidth: window.innerWidth + 'px', duration: 1 })
-          gsap.to(this.$refs['toggle-ball'], { left: 'calc(100% - 35px)', duration: 0.5} )
-          // gsap.to(this.$refs.toggle, { background: '#', duration: 1} )
+          gsap.to(this.$refs['toggle-ball'], { background: this.$route.meta.color, left: 'calc(100% - 35px)', duration: 0.5} )
+          gsap.to(this.$refs.toggle, { border: `6px solid ${this.$route.meta.color}`, background: 'none', duration: 0.5} )
+          gsap.to(this.$refs.toggleText, { color: this.$route.meta.color, duration: 0.5 })
           console.log('brif opened')
         } else {
           gsap.to(this.$refs.drawer, { minWidth: '340px', duration: 1 })
-          gsap.to(this.$refs['toggle-ball'], { left: '5px', duration: 0.5})
-          // gsap.to(this.$refs.toggle, { background: this.page.color, duration: 1})
+          gsap.to(this.$refs['toggle-ball'], { background: '#efefef', left: '5px', duration: 0.5})
+          gsap.to(this.$refs.toggle, { border: `6px solid #efefef`, background: this.$route.meta.color, duration: 0.5})
+          gsap.to(this.$refs.toggleText, { color: '#efefef', duration: 0.5 })
           console.log('brif closed')
         }
         
@@ -272,8 +265,13 @@ export default {
   mounted() {
   },
   methods: {
-    openBrif() {
-      this.openedBrif = !this.openedBrif;
+    async openBrif() {
+      console.log('open')
+      if (!this.brif) {
+        await this.$store.dispatch('openBrif', true)
+      } else {
+        await this.$store.dispatch('openBrif', false)
+      }
     }
   }
 }

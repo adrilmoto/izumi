@@ -32,13 +32,22 @@ caseLinks {
 export default new Vuex.Store({
   state: {
     metaAbout: null,
+    openedBrif: false,
   },
   mutations: {
     SET_STATE: (state, [key, val]) => {
       state[key] = val
+    },
+    OPEN_BRIF: (state, val) => {
+      state.openedBrif = val
     }
   },
   actions: {
+    openBrif({commit, state}, val) {
+      console.log('ACTION START', val, state.openedBrif)
+      commit('OPEN_BRIF', val)
+      console.log('ACTION END', state.openedBrif)
+    },
     async metaAboutGet ({commit}) {
       console.log('metaAboutGet :start')
       const { data: { data: { metaAbouts } } } = await axios.post('', {
@@ -70,9 +79,16 @@ export default new Vuex.Store({
             services {
               id
               title
-              subtitle
+              subtitle {
+                markdown
+                html
+              }
               bullets
-              color { hex }
+              bgcolor { hex }
+              accent { hex }
+              textcolor { hex }
+              buttonbg { hex }
+              buttontext { hex }
             }
           }
         `

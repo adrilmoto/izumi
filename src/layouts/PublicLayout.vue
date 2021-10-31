@@ -18,14 +18,16 @@
 }
 .left-block {
   width: 150px;
-  height: calc(100vh - 40px);
-  padding: 20px 0px;
+  height: calc(100vh - 100px);
+  padding: 50px 0px;
   background: #efefef;
   @apply fixed right-0 flex flex-col justify-between items-center;
   p {
     font-family: 'TT Commons ExtraBold';
     font-style: normal;
     font-weight: 900;
+    margin: 0px;
+    margin-top: 10px;
     font-size: 30px;
     line-height: 35px;
     text-align: center;
@@ -57,7 +59,7 @@ div(ref="layout").layout
   Header().mobile
   div(ref="content" :style="{ overflowY: $route.path !== '/' ? 'scroll' : 'hidden' }").layout-content
     router-view()
-  //- div(v-if="$route.path !== '/'").left-block
+  div(v-if="$route.path !== '/'").left-block
     p {{route}}
     LogoMobile(color="#191919")
 </template>

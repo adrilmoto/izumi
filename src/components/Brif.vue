@@ -226,6 +226,50 @@
   }
   
 }
+.politic {
+  // margin-left: 45px;
+  // border: 1px solid red;
+  // margin-top: 10px;
+  // height: 30px;
+  position: relative;
+  @apply self-start;
+  // width: 150px;
+  cursor: pointer;
+  text-decoration: underline;
+  // position: absolute;
+  white-space: wrap;
+  white-space: pre-wrap;       /* css-3 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;      /* Internet Explorer 5.5+ */
+  font-size: 16px;
+  color: #191919;
+  line-height: 16px;
+  margin-top: 20px;
+  &:hover {
+    opacity: 0.6;
+  }
+}
+label {
+  @apply flex flex-row items-center space-x-1;
+  margin-top: 20px;
+  cursor: pointer;
+  // border: 1px solid red;
+  input {
+    margin: none;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+  p {
+    margin: none;
+    padding: none;
+    padding-top: 4px;
+    opacity: 0.8;
+    line-height: 0px;
+  }
+}
 </style>
 
 <template lang="pug">
@@ -268,6 +312,11 @@ div(:style="{color: contentColor}").brif
           div.cont-block
             p Электронная почта
             input(v-model="form.mail")
+      label
+        input(v-model="accepted" type="checkbox")
+        p Я согласен на обработку персональных данных
+      .politic
+        a(href="").politic Политика конфиденциальности
     div(v-if="stage === 6").section.section-last
       .title
         h1 Поздравляем!
@@ -326,6 +375,7 @@ export default {
   data() {
     return {
       // brif description
+      accepted: false,
       stage: 1,
       description: 
       `
@@ -361,7 +411,7 @@ export default {
     },
     btnDisabled() {
       if (this.stage === 5) {
-        if (this.form.name && this.form.phone && this.form.mail && this.form.company) {
+        if (this.form.name && this.form.phone && this.form.mail && this.form.company && this.accepted) {
           return false
         } else return true
       } else {

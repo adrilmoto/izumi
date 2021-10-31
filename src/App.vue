@@ -27,22 +27,20 @@ html {
   margin: 0;
 }
 @font-face {
+  font-family: "Conthrax";
+  src: url("/fonts/conthrax.ttf") format("truetype");
+}
+@font-face {
   font-family: "TT Commons ExtraBold";
-  src: url("/fonts/TTCommons-ExtraBold.woff") format("woff"),
-        url("/fonts/TTCommons-ExtraBold.eot") format("eot"),
-        url("/fonts/TTCommons-ExtraBold.ttf") format("ttf");
+  src: url("/fonts/HelveticaNeueCyr-Black.ttf") format("truetype");
 }
 @font-face {
   font-family: "TT Commons Light";
-  src: url("/fonts/TTCommons-Light.woff") format("woff"),
-        url("/fonts/TTCommons-Light.eot") format("eot"),
-        url("/fonts/TTCommons-Light.ttf") format("ttf");
+  src: url("/fonts/HelveticaNeueCyr-Light.ttf") format("truetype");
 }
 @font-face {
   font-family: "TT Commons Medium";
-  src: url("/fonts/TTCommons-Medium.woff") format("woff"),
-        url("/fonts/TTCommons-Medium.eot") format("eot"),
-        url("/fonts/TTCommons-Medium.ttf") format("ttf");
+  src: url("/fonts/HelveticaNeueCyr-Medium.ttf") format("truetype");
 }
 p {
   // font-size: 20px;
@@ -98,6 +96,7 @@ export default {
   name: 'App',
   async mounted() {
     console.log('mounted')
+    // window.Chatra.$el.style.display = 'none'
     await this.$store.dispatch('metaAboutGet')
     // this.$nextTick(() => {
     //   console.log('window.Chatra', window.Chatra)

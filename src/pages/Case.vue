@@ -7,10 +7,12 @@
   .wrapper {
     @apply w-full flex flex-col items-center;
     max-width: 1100px;
-    padding: 50px 10px;
+    padding: 0px 10px;
+    padding-right: 140px;
+    border: 1px solid red;
     .header {
       @apply flex flex-row sticky top-0 w-full justify-between;
-      top: 50px;
+      top: 40px;
       // max-width: 800px;
       .guide {
         @apply flex justify-center;
@@ -135,6 +137,7 @@
       em {
         color: #e29229;
         font-family: 'TT Commons ExtraBold';
+        font-size: 28px;
       }
       p {
         @apply flex;
@@ -143,10 +146,10 @@
         font-size: 24px;
       }
       img {
-        width: auto;
+        width: 100%;
         max-height: 400px;
-        object-fit: contain;
-        background: rgb(240, 240, 240);
+        object-fit: cover;
+        background: rgb(0, 0, 0, 0.2);
       }
       video {
         width: 100%;

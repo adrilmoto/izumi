@@ -2,7 +2,7 @@
 .page {
   background: url('/images/ponch.gif'), linear-gradient(180deg, rgba(177,181,181,1) 39%, rgba(170,174,174,1) 62%);
   overflow: hidden;
-  border: 1px solid red;
+  // border: 1px solid red;
   width: 100%;
   min-width: 100%;
   max-width: 100%;
@@ -30,6 +30,12 @@
     // padding: 0px 20px;
   }
 }
+.aims {
+  font-family: 'Conthrax';
+  color: #626294;
+  padding: 0 0px;
+  @apply w-full flex justify-end;
+}
 @media screen and (max-width: 768px) {
   .page {
     background-size: 140%;
@@ -40,20 +46,23 @@
     }
     .menu {
       // display: flex;
-      margin: 0px 20px;
+      margin: 0px 0px;
       font-size: 18px;
+      bottom: 20%;
+      right: 0px;
       width: calc(100% - 40px);
-      @apply flex-col space-x-0 space-y-4 items-center;
+      // border: 1px solid red;
+      @apply flex flex-col w-full space-x-0 space-y-2 justify-center;
       // font-size: 16px;
     }
   }
+  .aims {
+    @apply flex flex-row w-full justify-center;
+    // border: 1px solid red;
+    text-align: center;
+  }
 }
-.aims {
-  font-family: 'Conthrax';
-  color: #626294;
-  padding: 0 20px;
-  @apply w-full flex justify-end;
-}
+
 </style>
 <template lang="pug">
   .page

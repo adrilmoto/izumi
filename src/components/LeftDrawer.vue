@@ -13,15 +13,16 @@
       // max-height: 100vh;
       max-height: 100vh;
       height: 100%;
-      width: 90px;
-      // aspect-ratio: 1/2;
-      border: 1px solid red;
-      .logo {
-        height: 25%;
-        width: 100%;
-        border: 1px solid red;
-        margin-top: -10px;
-        margin-left: -10px;
+      max-width: 140px;
+      // border: 1px solid red;
+      .logos {
+        height: 26%;
+        aspect-ratio: 1/3.3;
+        // width: 100%;
+        // border: 1px solid red;
+        margin-top: -10%;
+        // padding-bottom: 1vh;
+        // margin-left: -10px;
         position: relative;
         // background: url('/images/logo-izumi.svg');
         // overflow: hidden;
@@ -91,6 +92,7 @@
         @apply flex flex-col w-full items-start justify-center;
         padding-left: 0px;
         // border: 1px solid red;
+        // bottom: 0;
         margin-bottom: 50px;
         &-btn {
           // padding: 10px 10px 10px 0px;
@@ -168,9 +170,8 @@ div(ref="drawer").drawer
         v-if="r.meta.name"
         :key="r.path"
         :style="{cursor: 'pointer'}"
-        @click="$router.push(r.path).catch(e => {})").flex.flex-col.justify-start.items-start.h-full
-        //- Logo(:color="r.path === route.path ? r.meta.color : r.path === '/cases' && !route.meta.color ? '#CE5236' : '#efefef'")
-        .logo
+        @click="$router.push(r.path).catch(e => {})").logos
+        Logo(:color="r.path === route.path ? r.meta.color : r.path === '/cases' && !route.meta.color ? '#CE5236' : '#efefef'")
     .drawer-content-right
       .menu
         div(

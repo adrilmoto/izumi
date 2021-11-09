@@ -1,6 +1,6 @@
 <style lang="scss">
 ::-webkit-scrollbar {
-  width: 9px;
+  width: 0px;
   height: 0px !important;
 }
 
@@ -16,6 +16,12 @@
 ::-webkit-scrollbar-track {
   background: #efefef;
   margin-right: 2px;
+}
+@media screen and (max-width: 1100px) {
+  ::-webkit-scrollbar {
+    width: 0px;
+    height: 0px !important;
+  }
 }
 body {
   padding: 0;

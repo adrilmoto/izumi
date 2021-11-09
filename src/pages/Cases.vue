@@ -1,7 +1,7 @@
 <style lang="scss" scoped>
-.page {
+.page-cases {
   @apply flex flex-row justify-start;
-  min-height: calc(100vh - 0px);
+  min-height: 100vh;
   // padding-bottom: 50px;
   min-width: 70vw;
   // overflow-y: scroll;
@@ -10,7 +10,7 @@
   padding-left: 30px;
   // border: 1px solid red;
   &-wrapper {
-    border: 1px solid red;
+    // border: 1px solid red;
     @apply w-full flex flex-col justify-start items-start;
     padding-right: 140px;
     // max-width: 1100px;
@@ -89,9 +89,9 @@
   }
 }
 @media screen and (max-width: 1100px) {
-  .page {
+  .page-cases {
     @apply flex flex-row justify-center;
-    height: 100vh;
+    min-height: 100vh;
     padding-left: 0px;
     // overflow-y: scroll;
     background: #efefef;
@@ -103,23 +103,25 @@
   }
 }
 @media screen and (max-width: 600px){
-  .page {
-    // padding-bottom: 0;
+  .page-cases {
+    
     &-wrapper {
       // padding: 20px;
-      padding-top: 70px;
+      padding-top: 50px;
+      padding-bottom: 50px;
       p {
-        margin-top: 50px;
+        margin-top: 20px;
         font-size: 18px;
       }
       h2 {
         font-size: 32px;
         // margin-left: 20px;
+        margin-top: 20px;
         margin-bottom: 10px;
       }
       
       .cases {
-        margin-bottom: 50px;
+        margin-bottom: 20px !important;
         margin-left: 10px;
         .anim {
           transform: none;
@@ -152,9 +154,9 @@
 </style>
 
 <template lang="pug">
-div(ref="page").page
+div(ref="page").page-cases
   //- DialogCase(v-if="openedCase" @close="openCase()" :dialogInfo="dialogInfo")
-  .page-wrapper
+  .page-cases-wrapper
     div(
       v-for="(c,ci) in categories" :key="c.id"
       ).flex.flex-row.flex-wrap.w-full

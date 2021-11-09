@@ -1,7 +1,71 @@
 <style lang="scss">
+.socials {
+  @apply flex flex-row justify-start items-center space-x-2 mt-2;
+  --size: 30px;
+  .telegram {
+    width: var(--size);
+    height: var(--size);
+    background: url('/images/icons/telegram_black.svg');
+    @apply bg-center bg-contain bg-no-repeat cursor-pointer;
+    &:hover {
+      transform: scale(0.9);
+    }
+  }
+  .instagram {
+    width: var(--size);
+    height: var(--size);
+    background: url('/images/icons/instagram_black.svg');
+    @apply bg-center bg-contain bg-no-repeat cursor-pointer;
+    &:hover {
+      transform: scale(0.9);
+    }
+  }
+  .website {
+    width: var(--size);
+    height: var(--size);
+    background: url('/images/icons/website.svg');
+    @apply bg-center bg-contain bg-no-repeat cursor-pointer;
+    &:hover {
+      transform: scale(0.9);
+    }
+  }
+  .gdrive {
+    width: var(--size);
+    height: var(--size);
+    background: url('/images/icons/gdrive.svg');
+    @apply bg-center bg-contain bg-no-repeat cursor-pointer;
+    &:hover {
+      transform: scale(0.9);
+    }
+  }
+}
+.guide {
+  @apply flex justify-center;
+  a {
+    background: #CE5236;
+    padding: 0px 10px;
+    text-decoration: none;
+    color: #efefef;
+    border-radius: 4px;
+    font-family: 'TT Commons Medium';
+    font-size: 20px;
+    line-height: 100%;
+    font-weight: 400;
+    white-space: nowrap;
+    @apply bg-center flex flex-row items-center mt-4 bg-contain bg-no-repeat cursor-pointer;
+    &:hover {
+      opacity: 0.6;
+    }
+    .img {
+      width: 30px;
+      height: 30px;
+      background: url('/images/icons/pdf.svg');
+      @apply bg-center bg-contain bg-no-repeat mr-2;
+    }
+  }
+}
 .page-case-wrapper {
   @apply relative flex flex-row w-full justify-center;
-  // max-height: 100vh;
   background: #efefef;
   min-width: 70vw;
   .wrapper {
@@ -9,127 +73,49 @@
     max-width: 1100px;
     padding: 0px 10px;
     padding-right: 140px;
-    border: 1px solid red;
     .header {
-      @apply flex flex-row sticky top-0 w-full justify-between;
-      top: 40px;
-      // max-width: 800px;
-      .guide {
-        @apply flex justify-center;
-        // padding-left: 20px;
-        // padding-top: 20px;
-        a {
-          // background: #e29229;
-          // width: 100%;
-          margin-top: 10px;
-          padding: 6px 10px;
-          text-decoration: none;
-          color: #e29229;
-          border-radius: 4px;
-          font-family: 'TT Commons ExtraBold';
-          font-size: 24px;
-          // border: 1px solid red;
-          @apply bg-center flex flex-row items-center space-x-4 bg-contain bg-no-repeat cursor-pointer;
-          &:hover {
-            opacity: 0.6;
-          }
-          .img {
-            width: 30px;
-            height: 30px;
-            background: url('/images/icons/pdf.svg');
-            @apply bg-center bg-contain bg-no-repeat;
-          }
-        }
-      }
+      @apply flex flex-col sticky top-0 w-full justify-between items-start;
+      top: 50px;
       button {
         @apply flex flex-row items-center justify-center;
-        // padding: 6px 0px;
-        // border-radius: 5px;
         cursor: pointer;
         border: none;
         outline: none;
-        // border: 1px solid red;
+        background: none;
         .arrow {
-          // margin-right: 5px;
-          // border: 1px solid red;
           width: 22px;
           height: 22px;
           background: url('/images/icons/arrow-left.svg');
           background-size: contain;
           background-position: center;
-          // transform: rotate(180deg);
         }
         p {
           font-size: 22px;
-          // color: #A7AAAF;ы
-          // border: 1px solid red;
           font-family: 'TT Commons ExtraBold';
           font-weight: bold;
           color: #191919;
           padding-top: 4px;
           line-height: 22px;
-          // margin-bottom: 2px;
-          // text-decoration: var(--decoration);
         }
         &:hover {
-          // border-bottom: 1px solid #191919;
           opacity: 0.6;
-          // background: rgba(113, 116, 124, 0.5);
-          // text-decoration: underline;
-          // border-bottom: 1px solid red;
-          // --decoration: underline;
         }
       }
     }
-    h1 {
-      font-size: 48px;
-      margin: 0;
-    }
-    .socials {
-      @apply flex flex-row flex-wrap w-full justify-center items-center space-x-2 pb-10 pt-6;
-      // border: 1px solid red;
-
-      .telegram {
-        width: 40px;
-        height: 40px;
-        background: url('/images/icons/telegram_black.svg');
-        @apply bg-center bg-contain bg-no-repeat cursor-pointer;
-        &:hover {
-          transform: scale(0.9);
-        }
-      }
-      .instagram {
-        width: 40px;
-        height: 40px;
-        background: url('/images/icons/instagram_black.svg');
-        @apply bg-center bg-contain bg-no-repeat cursor-pointer;
-        &:hover {
-          transform: scale(0.9);
-        }
-      }
-      .website {
-        width: 40px;
-        height: 40px;
-        background: url('/images/icons/website.svg');
-        @apply bg-center bg-contain bg-no-repeat cursor-pointer;
-        &:hover {
-          transform: scale(0.9);
-        }
-      }
-      .gdrive {
-        width: 30px;
-        height: 30px;
-        background: url('/images/icons/gdrive.svg');
-        @apply bg-center bg-contain bg-no-repeat cursor-pointer;
-        &:hover {
-          transform: scale(0.9);
-        }
+    .content {
+      max-width: 700px;
+      margin-bottom: 100px;
+      @apply flex flex-row z-30 items-start w-full;
+      h1 {
+        font-size: 48px;
+        margin: 0;
+        white-space: nowrap;
+        @apply flex flex-col items-start justify-between ml-4;
+        // border: 1px solid red;
       }
     }
     .case-markdown-wrapper {
       @apply relative flex flex-col flex-wrap w-full items-start content-start;
-      // max-height: 100vh;
-      // max-height: 150vh;
       padding-bottom: 100px;
       max-width: 700px;
       width: 100%;
@@ -160,23 +146,83 @@
   }
   // padding: 40px;
 }
-@media screen and (max-width: 1100px) {
-  .wrapper {
-    @apply items-center;
-    // border: 1px solid red;
-  }
-  .case-markdown-wrapper {
-    max-width: 100% !important;
-    width: 100%;
-    // border: 1px solid red;
-    img {
-      width: 100%;
-      max-height: none;
+.social-container {
+  @apply w-full flex flex-col justify-start items-start;
+}
+.cover-block {
+  // background: #a7a4a4;
+  height: 8%;
+  @apply absolute inset-0 w-full;
+}
+@media screen and (max-width: 1400px) {
+  .page-case-wrapper {
+    .wrapper {
+      .header {
+        max-width: 700px;
+        position: relative !important;
+        top: none;
+
+      }
+      .content {
+        margin-top: 70px;
+      }
     }
   }
+}
+@media screen and (max-width: 1100px) {
   .page-case-wrapper {
-    padding-top: 40px;
-    border: 1px solid red;
+    padding-top: 70px;
+    .wrapper {
+      padding-right: 10px;
+      .header {
+        display: none;
+      }
+      .content {
+        margin-top: 0px;
+        max-width: 100%;
+        width: 100%;
+        margin-bottom: 30px;
+      }
+
+    }
+    .case-markdown-wrapper {
+      max-width: 100% !important;
+      width: 100%;
+      // border: 1px solid red;
+      img {
+        width: 100%;
+        max-height: none;
+      }
+    }
+  }
+}
+@media screen and (max-width: 600px) {
+  .page-case-wrapper {
+    .wrapper {
+      .content {
+        // @apply;
+        img {
+          // width: 30%;
+          // height: 50%;
+        }
+        h1 {
+          // @apply ml-0;
+          font-size: 28px;
+          white-space:normal;
+        }
+      }
+
+      .case-markdown-wrapper {
+        // border: 1px solid red;
+        em {
+          font-size: 22px;
+        }
+        p {
+          font-size: 18px;
+          padding: 6px 0px;
+        }
+      }
+    }
   }
 }
 </style>
@@ -185,20 +231,23 @@
 div(
   v-if="caseItem"
   ).page-case-wrapper
+  .cover-block
   .wrapper
     .header
       button(@click="$router.back()")
         .arrow
         p Назад
-      .guide
-        a(v-if="caseItem.guide" :href="caseItem.guide.url" target="_blank")
-          .img
-          p БРЕНДБУК
     //- title
-    h1 {{ caseItem.name }}
-    .socials
-      a(v-for="link in caseItem.caseLinks" :class="[link.type]" :href="link.url" target="_blank")
-      
+    .content
+      img(:src="caseItem.img.url" style="border-radius: 10px; height: 100%;" draggable="false")
+      h1 {{ caseItem.name }}
+        .social-container
+          .socials
+            a(v-for="link in caseItem.caseLinks" :class="[link.type]" :href="link.url" target="_blank")
+          .guide
+            a(v-if="caseItem.guide" :href="caseItem.guide.url" target="_blank")
+              .img
+              p Brand Book
     //- video(src="https://media.graphcms.com/OIiBzxjJTrOvA7sos987" type="video/mp4" autoplay).w-full.br
     div(
       ref="caseMarkdownWrapper"

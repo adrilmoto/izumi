@@ -2,7 +2,7 @@
 .header {
   @apply flex fixed w-full top-0;
   background: #191919;
-  // height: 50px;
+  height: 50px;
   z-index: 10000;
   display: none;
   &-content {
@@ -86,11 +86,38 @@
     }
   }
 }
+.btn-back {
+  width: 30px;
+  height: 30px;
+  border: none;
+  margin-left: 5px;
+  outline: none;
+  // background: none;
+  background: url('/images/icons/arrow-left-white.svg');
+  background-size: contain;
+  background-position: center;
+  // border: 1px solid red;
+  @apply flex flex-row items-center;
+  p {
+    font-size: 30px;
+    font-family: 'TT Commons Medium';
+    font-weight: 400;
+    color: #efefef;
+    // padding-top: 4px;
+    line-height: 100%;
+    margin-left: 20px;
+  }
+  &:hover {
+    opacity: 0.6;
+  }
+}
 </style>
 <template lang="pug">
 .header
   .header-content
-    LogoMobile
+    LogoMobile(v-if="$route.name !== 'Case'")
+    button(v-else @click="$router.back()").btn-back
+      //- p Назад
     button(@click="toggleMenu()").btn-menu
   div(v-if="showMenu").menu
     button(@click="toggleMenu()").close
@@ -99,12 +126,12 @@
       v-if="route.meta.name"
       @click="link(route.path)"
     ).menu-link {{route.name}}
-    div(@click="brifopen()").menu-link БРИФ
+    div(@click="$store.dispatch('openBrif', true)").menu-link БРИФ
     .socials-btns
       a(href="https://instagram.com/voice.tag?utm_medium=copy_link" target="_blank").instagram
       a(href="https://t.me/VOiCETAG" target="_blank").telegram
       a(href="mailto:izumi.branding@gmail.com").mail
-  Brif(v-if="openedBrif" @close="brifopen(), toggleMenu()")
+  Brif(v-if="openedBrif" @close="$store.dispatch('openBrif', false)")
 </template>
 
 <script>
@@ -123,7 +150,24 @@ export default {
       openedBrif: false,
     }
   },
+  computed: {
+    brif () {
+      return this.$store.state.openedBrif
+    }
+  },
   watch: {
+    brif: {
+      deep: true,
+      async handler(to) {
+        if (to) {
+          console.log()
+          this.brifopen()
+        } else {
+          this.showMenu = false
+          this.brifopen()
+        }
+      }
+    }
   },
   methods: {
     toggleMenu() {

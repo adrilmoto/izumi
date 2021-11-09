@@ -1,11 +1,11 @@
 <style lang="scss" scoped>
-.page {
+.page-about {
   @apply flex flex-row relative justify-start items-start w-full;
   min-height: 100vh;
   min-width: 70vw;
   background: #efefef;
   padding: 0px 0px 0px 50px;
-  .content {
+  &-content {
     @apply flex-col flex w-full justify-start;
     max-width: 1000px;
     padding-top: 50px;
@@ -59,9 +59,9 @@
   }
 }
 @media screen and (max-width: 1300px) {
-  .page {
+  .page-about {
     padding: 20px;
-    .content {
+    &-content {
       padding-bottom: 100px;
       margin-right: 0px;
       h1 {
@@ -114,21 +114,56 @@
   }
 }
 @media screen and (max-width: 1100px) {
-  .page {
-    padding-top: 50px;
+  .page-about {
+    padding: 0px;
+    padding-top: 70px;
+    min-width: 100%;
+    width: 100%;
+    max-width: 100%;
+    // border: 1px solid red;
+    &-content {
+      padding: 0px 10px;
+      width: 100%;
+      padding-bottom: 100px;
+      max-width: 100%;
+      .blocks {
+        margin-top: 50px;
+      }
+    }
   }
 }
 @media screen and (max-width: 600px) {
-  .page {
-    .content {
+  .page-about {
+    padding-top: 50px;
+    &-content {
+      margin-top: 20px;
+      
       h1 {
-        font-size: 34px;
+        font-size: 24px;
       }
       p {
-        font-size: 22px;
+        font-size: 18px;
       }
       .blocks {
         margin-top: 20px;
+        .egg {
+          .egg-number {
+            h1 {
+              font-size: 80px;
+              margin-right: 50px;
+            }
+            .egg {
+              min-width: 60px;
+              height: 60px;
+            }
+          }
+          &-content {
+            p {
+              font-size: 18px;
+              margin-top: 20px;
+            }
+          }
+        }
       }
     }
   }
@@ -136,10 +171,10 @@
 </style>
 
 <template lang="pug">
-div(ref="page").page
+div(ref="page").page-about
   div(
     v-if="metaAbout"
-  ).content
+  ).page-about-content
     h1 {{metaAbout.title}}
     p(style="max-width: 600px") А вот несколько <span>яичек</span>, почему мы и ваш бренд — это <span>perfect scramble</span>:
     .blocks

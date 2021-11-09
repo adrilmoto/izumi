@@ -41,7 +41,7 @@
 @media screen and (max-width: 1100px) {
   .layout {
     &-content {
-      max-width: calc(100vw);
+      max-width: calc(100vw) !important;
     }
   }
   .desktop {
